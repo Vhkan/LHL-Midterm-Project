@@ -1,0 +1,8 @@
+Price: $80,000
+Year:1959
+Make:Chevrolet
+Model:Corvette
+Exterior Color:White with silver
+Interior Color:Black
+Transmission:Manual
+Odometer:66000
