@@ -9,7 +9,7 @@ const express = require('express');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
-  res.render('users');
+  res.render('index');
 });
 
 router.get('/about', (req, res) => {
@@ -45,7 +45,7 @@ router.get('/service', (req, res) => {
 });
 
 router.get('/join', (req, res) => {
-  res.redirect('contact');
+  res.redirect('/contact');
 });
 
 router.post('/login', (req, res) => {
