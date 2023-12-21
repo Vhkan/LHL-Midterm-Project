@@ -16,44 +16,71 @@ router.get('/about', (req, res) => {
   res.render('about');
 });
 
-router.get('/buy', (req, res) => {
-  res.render('buy');
+/* we are able to chain routes using ".route" like below to avoid duplicating lines of code and avoid typos. Link to documentation
+https://expressjs.com/en/guide/routing.html*/
+
+router.route('/login')
+  .get((req, res) => {
+    res.render('login');
+  })
+  .post((req, res) => {
+    res.send('LOGGED IN');
+  });
+
+router.route('/register')
+  .get((req, res) => {
+    res.render('register');
+  })
+  .post((req, res) => {
+    res.send('REGISTERED');
+  });
+
+router.route('/inventory')
+  .get((req, res) => {
+  res.render('inventory')
+  .post((req, res) => {
+    res.send('CAR DETAILS PAGE');
+  });
 });
 
-router.get('/inventory', (req, res) => {
-  res.render('inventory');
+router.route('/buy')
+  .get((req, res) => {
+  res.render('buy')
+  .post((req, res) => {
+    res.send('CAR PURCHASED');
+  });
 });
 
-router.get('/sell', (req, res) => {
-  res.render('sell');
+router.route('/sell')
+  .get((req, res) => {
+  res.render('sell')
+  .post((req, res) => {
+    res.send('CAR SOLD');
+  });
 });
 
-router.get('/contact', (req, res) => {
-  res.render('contact');
+router.route('/service')
+  .get((req, res) => {
+  res.render('service')
+  .post((req, res) => {
+    res.send('CAR FIXED');
+  });
 });
 
-router.get('/login', (req, res) => {
-  res.render('login');
+router.route('/contact')
+  .get((req, res) => {
+  res.render('contact')
+  .post((req, res) => {
+    res.send('THANKS FOR THE REVIEW');
+  });
 });
 
-router.get('/register', (req, res) => {
-  res.render('register');
-});
-
-router.get('/service', (req, res) => {
-  res.render('service');
-});
-
-router.get('/join', (req, res) => {
-  res.redirect('/contact');
-});
-
-router.post('/login', (req, res) => {
-  res.send('login');
-});
-
-router.post('/register', (req, res) => {
-  res.send('register');
+router.route('/join')
+  .get((req, res) => {
+  res.redirect('/contact')
+  .post((req, res) => {
+    res.resend('YOU GOT A JOB');
+  })
 });
 
 module.exports = router;
