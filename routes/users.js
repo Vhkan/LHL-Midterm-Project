@@ -6,10 +6,14 @@
  */
 
 const express = require('express');
+const { getCars } = require('../db/queries/cars');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
-  res.render('index');
+  getCars()
+  .then(data => {
+   res.render('index', {data})
+  })
 });
 
 router.get('/about', (req, res) => {
