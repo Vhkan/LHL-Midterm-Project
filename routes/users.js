@@ -16,7 +16,7 @@ router.get('/about', (req, res) => {
   res.render('about');
 });
 
-/* we are able to chain routes using ".route" like below to avoid duplicating lines of code and avoid typos. Link to documentation
+/* we are able to chain routes using ".route" like below to avoid duplicating lines of code and avoid typos. Article is near the bottom of the page. Link to documentation
 https://expressjs.com/en/guide/routing.html*/
 
 router.route('/login')
