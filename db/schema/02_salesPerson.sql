@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS sales_person CASCADE;
+
+CREATE TABLE sales_person (
+  id SERIAL PRIMARY KEY NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  first_name VARCHAR(255) NOT NULL
+);
