@@ -16,3 +16,42 @@ body {
     rgba(163, 208, 219, 1) 100%
   );
 }
+
+header {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.header-section {
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  width: 100vw;
+  height: 100px;
+  background-color: red;
+}
+
+.logo {
+  margin-left: 1em;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1em;
+  margin-right: 1em;
+}
+
+.user-auth {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 1em;
+  gap: 1em;
+}
