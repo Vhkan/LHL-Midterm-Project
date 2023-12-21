@@ -6,3 +6,4 @@ Exterior Color:White with silver
 Interior Color:Black
 Transmission:Manual
 Odometer:66000
+/home/labber/LHL-Midterm-Project/documents/Chevy Corvette
