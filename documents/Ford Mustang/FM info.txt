@@ -1,8 +1,0 @@
-Make:Dodge
-Model:Dart
-Odometer:99100
-Transmission:Automatic
-Interior Color:Black
-Exterior Color:Green
-Year:1969
-Price: $32,900

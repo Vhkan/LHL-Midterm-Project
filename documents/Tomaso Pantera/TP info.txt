@@ -1,8 +1,0 @@
-Price: $129,500
-Year:1972
-Make:De Tomaso
-Model:Pantera
-Exterior Color:Red
-Interior Color:Black
-Transmission:Manual
-Odometer:12400

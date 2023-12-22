@@ -1,7 +1,0 @@
-Price: $89,900
-Year:1961
-Make:Chevrolet
-Model:Impala
-Exterior Color:Red
-Interior Color:Red
-Odometer:3710

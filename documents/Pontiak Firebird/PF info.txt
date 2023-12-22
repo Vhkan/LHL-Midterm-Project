@@ -1,8 +1,0 @@
-Price: $46,000
-Year:1968
-Make:Pontiac
-Model:Firebird
-Exterior Color:Cameo Ivory White
-Interior Color:Black
-Transmission:Manual
-Odometer:77450
