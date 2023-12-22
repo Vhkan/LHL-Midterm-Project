@@ -1,0 +1,8 @@
+Year:1966
+Make:Ford
+Model:Mustang
+Exterior Color:BLUE
+Interior Color:Black
+Transmission:Automatic
+Odometer:120 000
+Price: 22 000

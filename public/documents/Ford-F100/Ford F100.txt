@@ -1,0 +1,8 @@
+Price: $52,500
+Year:1956
+Make:Ford
+Model:F100
+Exterior Color:Red
+Interior Color:Black
+Transmission:Automatic
+Odometer:8650

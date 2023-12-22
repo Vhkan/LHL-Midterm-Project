@@ -1,0 +1,8 @@
+Price: $150,000
+Year:1969
+Make:Mercedes-Benz
+Model:280SL
+Exterior Color:Tan
+Interior Color:Burgundy Leather
+Transmission:Automatic
+Odometer:58589
