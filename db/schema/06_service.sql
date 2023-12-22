@@ -1,6 +1,0 @@
-DROP TABLE IF EXISTS service CASCADE;
-
-CREATE TABLE service (
-  id SERIAL NOT NULL,
-  invoice INT NOT NULL
-);

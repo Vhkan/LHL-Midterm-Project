@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS customers CASCADE;
 
-CREATE TABLE customers (
+CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   last_name VARCHAR(255) NOT NULL,
   first_name VARCHAR(255) NOT NULL,
