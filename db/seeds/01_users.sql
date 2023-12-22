@@ -1,3 +1,10 @@
--- Users table seeds here (Example)
-INSERT INTO users (name) VALUES ('Alice');
-INSERT INTO users (name) VALUES ('Kira');
+INSERT INTO users (last_name, first_name, phone, country, street, city, province, post_code) VALUES ('Thomsson', 'Kimbra', '368-556-8158', 'Canada', 'Iowa', 'Fredericton', 'New Brunswick', 'E3G');
+INSERT INTO users (last_name, first_name, phone, country, street, city, province, post_code) VALUES ('Malia', 'Margette', '158-933-5627', 'Canada', 'Bartelt', 'Alberton', 'Prince Edward Island', 'P7K');
+INSERT INTO users (last_name, first_name, phone, country, street, city, province, post_code) VALUES ('Hourahan', 'Gareth', '664-692-5152', 'Canada', 'Sutherland', 'Aylmer', 'Ontario', 'N5H');
+INSERT INTO users (last_name, first_name, phone, country, street, city, province, post_code) VALUES ('Windibank', 'Bastian', '294-572-7484', 'Canada', 'High Crossing', 'Bedford', 'Quebec', 'J6W');
+INSERT INTO users (last_name, first_name, phone, country, street, city, province, post_code) VALUES ('Greensted', 'Vitia', '297-762-2821', 'Canada', 'Service', 'Nicolet', 'Quebec', 'J3T');
+INSERT INTO users (last_name, first_name, phone, country, street, city, province, post_code) VALUES ('Fivey', 'Dwain', '291-177-4087', 'Canada', 'Goodland', 'Saskatoon', 'Saskatchewan', 'S7W');
+INSERT INTO users (last_name, first_name, phone, country, street, city, province, post_code) VALUES ('Castellani', 'Billi', '289-866-3343', 'Canada', 'Dahle', 'Wingham', 'Ontario', 'T5K');
+INSERT INTO users (last_name, first_name, phone, country, street, city, province, post_code) VALUES ('Webb-Bowen', 'Jarred', '229-704-9773', 'Canada', 'North', 'Bedford', 'Quebec', 'J6W');
+INSERT INTO users (last_name, first_name, phone, country, street, city, province, post_code) VALUES ('Sheryn', 'Carter', '307-265-5624', 'Canada', 'Stephen', 'Ottawa', 'Ontario', 'J8Y');
+INSERT INTO users (last_name, first_name, phone, country, street, city, province, post_code) VALUES ('Griffoen', 'Kerby', '650-455-9626', 'Canada', 'Calypso', 'Prince Albert', 'Saskatchewan', 'S6W');
