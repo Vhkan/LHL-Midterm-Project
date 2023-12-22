@@ -57,7 +57,7 @@ router.route('/buy')
 
 router.route('/sell')
   .get((req, res) => {
-  res.render('sell')
+  res.render('seller_listing')
   .post((req, res) => {
     res.send('CAR SOLD');
   });
