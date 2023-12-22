@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS customers CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -10,5 +10,7 @@ CREATE TABLE users (
   city VARCHAR(255) NOT NULL,
   province VARCHAR(255) NOT NULL,
   post_code VARCHAR(255) NOT NULL,
-  is_customer BOOLEAN
+  is_customer BOOLEAN,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
 );
