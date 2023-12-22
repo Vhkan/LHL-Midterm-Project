@@ -23,15 +23,31 @@
 </head>
 
 <body>
-  
+
   <%- include('partials/header') %>
 
-  <ul> 
-    <% data.forEach(item => { %> <li> <%= item.make}) %> </li> %>
-    
-  </ul>
 
- 
+  <!-- TEST CODE -->
+
+    <% data.forEach(item => { %>
+       <div class="car-container">
+
+        <div class="make"><%= item.make %></div>
+
+        <div class="model"><%= item.model %></div>
+
+        <a href="/sell">
+
+          <div class="car-image">
+          <img src="<%= item.photo_url_1 %>" alt="image_unavailable">
+
+        </div>
+        </a>
+      </div>
+      <% }); %>
+
+
+
     <h1>Have fun!!🥔</h1>
 
 
