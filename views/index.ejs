@@ -30,7 +30,7 @@
 
   <%- include('partials/header') %>
 
-    <div class="container mt-4">
+    <div class="container mt-4 cars-filter-container">
       <div class="row">
         <div class="col-md-3 car-filter">
           <form>
@@ -85,6 +85,12 @@
                       <option value="50000">$40,000 - $50,000</option>
                       <option value="60000">$50,000 - $60,000</option>
                       <option value="70000">$60,000 - $70,000</option>
+                      <option value="70000">$70,000 - $80,000</option>
+                      <option value="70000">$80,000 - $90,000</option>
+                      <option value="70000">$90,000 - $100,000</option>
+                      <option value="70000">$100,000 - $110,000</option>
+                      <option value="70000">$110,000 - $120,000</option>
+                      <option value="70000">$1200,000 - $130,000</option>
                     </select>
                   </td>
                 </tr>
@@ -100,7 +106,7 @@
             <% data.forEach(item=> { %>
               <div class="col-md-3">
                 <div class="card">
-                  <a href="/sell">
+                  <a href="/contact">
                     <img src="<%= item.photo_url_1 %>" class="card-img-top" alt="image_unavailable">
                   </a>
                   <div class="card-body">
@@ -119,7 +125,7 @@
                     </h6>
                     <h6 class="card-info"><b>Price:</b> $<%= item.price %>
                     </h6>
-                    <a href="/contact" class="btn btn-success btn-large" role="button">Contact Seller</a>
+                    <a href="/contact" class="btn btn-warning btn-large" role="button">Contact Seller</a>
                   </div>
                 </div>
               </div>
@@ -131,6 +137,7 @@
 
 
     <%- include('partials/footer') %>
+    
       <!-- Bootstrap JS -->
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
