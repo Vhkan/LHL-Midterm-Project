@@ -2,15 +2,15 @@
 <html lang="en">
 
 <head>
-  <title>PROJECT TITLE</title>
+  <title>TRUE RETRO</title>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <!-- <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/main.css" /> -->
   <link rel="stylesheet" href="/styles/layout.css" />
 
   <!-- Font Awesome link for icons -->
@@ -20,39 +20,128 @@
   <!-- jQuery link -->
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
 </head>
 
 <body>
 
   <%- include('partials/header') %>
 
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-3 car-filter">
+          <form>
+            <h2>Filter Menu</h2>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>
+                    <select class="form-control" id="filterYear">
+                      <option value="">Year</option>
+                      <option value="1950">1950</option>
+                      <option value="1960">1960</option>
+                      <option value="1970">1970</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <select class="form-control" id="filterMake">
+                      <option value="">Make</option>
+                      <option value="Chevrolet">Chevrolet</option>
+                      <option value="Dodge">Dodge</option>
+                      <option value="Ford">Ford</option>
+                      <option value="Mercedes">Mercedes</option>
+                      <option value="Pontiac">Pontiac</option>
+                      <option value="Tomaso">Tomaso</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <select class="form-control" id="filterModel">
+                      <option value="">Model</option>
+                      <option value="Corvette">Corvette</option>
+                      <option value="Impala">Impala</option>
+                      <option value="Dart">Dart</option>
+                      <option value="Mustang">Mustang</option>
+                      <option value="F100">F100</option>
+                      <option value="280SL">280SL</option>
+                      <option value="Firebird">Firebird</option>
+                      <option value="Pantera">Pantera</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <select class="form-control" id="filterPrice">
+                      <option value="">Price</option>
+                      <option value="20000">$10,000 - $20,000</option>
+                      <option value="30000">$20,000 - $30,000</option>
+                      <option value="40000">$30,000 - $40,000</option>
+                      <option value="50000">$40,000 - $50,000</option>
+                      <option value="60000">$50,000 - $60,000</option>
+                      <option value="70000">$60,000 - $70,000</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-  <!-- TEST CODE -->
-
-    <% data.forEach(item => { %>
-       <div class="car-container">
-
-        <div class="make"><%= item.make %></div>
-
-        <div class="model"><%= item.model %></div>
-
-        <a href="/sell">
-
-          <div class="car-image">
-          <img src="<%= item.photo_url_1 %>" alt="image_unavailable">
-
+            <button type="submit" class="btn btn-primary">Apply Filters</button>
+          </form>
         </div>
-        </a>
+
+        <div class="col-md-9">
+          <div class="row mb-4">
+            <% data.forEach(item=> { %>
+              <div class="col-md-3">
+                <div class="card">
+                  <a href="/sell">
+                    <img src="<%= item.photo_url_1 %>" class="card-img-top" alt="image_unavailable">
+                  </a>
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <%= item.make %>
+                        <%= item.model %>
+                    </h5>
+                    <h6 class="card-info"><b>Year:</b>
+                      <%= item.year %>
+                    </h6>
+                    <h6 class="card-info"><b>Color:</b>
+                      <%= item.color %>
+                    </h6>
+                    <h6 class="card-info"><b>Mileage:</b>
+                      <%= item.odometer %>
+                    </h6>
+                    <h6 class="card-info"><b>Price:</b> $<%= item.price %>
+                    </h6>
+                    <a href="/contact" class="btn btn-success btn-large" role="button">Contact Seller</a>
+                  </div>
+                </div>
+              </div>
+              <% }); %>
+          </div>
+        </div>
       </div>
-      <% }); %>
-
-
-
-    <h1>Have fun!!🥔</h1>
-
+    </div>
 
 
     <%- include('partials/footer') %>
+      <!-- Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
 </body>
 
 </html>

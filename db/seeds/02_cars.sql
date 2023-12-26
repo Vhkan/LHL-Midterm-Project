@@ -8,3 +8,5 @@ VALUES
   ('Mercedes-Benz', '280SL', 1969, 'Tan', 58589, 150000, '/documents/Mercedes-280/1-1969-mercedes-benz-280sl-std.jpg', '/documents/Mercedes-280/2-1969-mercedes-benz-280sl-std.jpg', '/documents/Mercedes-280/3-1969-mercedes-benz-280sl-std.jpg'),
   ('Pontiac', 'Firebird', 1968, 'Cameo-Ivory-White', 77450, 46000, '/documents/Pontiac Firebird/1-1968-pontiac-firebird-std.jpg', '/documents/Pontiac Firebird/2-1968-pontiac-firebird-std.jpg', '/documents/Pontiac Firebird/3-1968-pontiac-firebird-std.jpg'),
   ('Tomaso', 'Pantera', 1972, 'red', 12400, 129500, '/documents/Tomaso Pantera/1-tomaso-pantera-std.jpg', '/documents/Tomaso Pantera/2-1972-de-tomaso-pantera-std.jpg', '/documents/Tomaso Pantera/3-1972-de-tomaso-pantera-std.jpg');
+
+
