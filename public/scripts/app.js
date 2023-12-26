@@ -135,26 +135,47 @@ function updateCarList(cars) {
 
 
 
-//Chat on contact_seller page
-const sendMessage = function() {
+//Chat on contact_seller page V2
+$(document).ready(function() {
   const messageInput = $("#messageInput");
   const chatContainer = $("#chatContainer");
 
-  // Gets the msg input value
-  const msg = messageInput.val();
+  $('#send-btn').click(sendMessage);
 
-  // Creates a new message
-  const newMessage = $("<div class='mb-2'><strong>You:</strong> " + msg + "</div>");
+  function sendMessage() {
+    const msg = messageInput.val();
 
-  // Adds a new message to the chat
-  chatContainer.append(newMessage);
+    // New message based on the sender (Seller/Buyer)
+    const sender = isSellerTurn() ? "Seller" : "Buyer";
 
-  // Clears the msg input field
-  messageInput.val("");
-}
+    //Cerating a message + class (sender + "-message" => "Buyer-message")
+    const newMessage = $("<div class='mb-2 " + sender + "-message'><strong>" + sender + ":</strong> " + msg + "</div>");
 
-// Sends the msg on a button click
-$("#send-btn").click(sendMessage);
+    // Adds a new message to the chat
+    chatContainer.append(newMessage);
 
+    // Clears the msg input field
+    messageInput.val("");
 
+    // Changes the message sender
+    toggleSenderTurn();
+  }
 
+  // Check if it's the seller's / buyer's turn now
+  //Returns a true/false boolean
+  function isSellerTurn() {
+    if ($('.seller-message').length % 2 === 0) {
+      return true; // It's seller's turn
+    } else {
+      return false; // It's buyer's turn
+    }
+  }
+  // Toggles sender's the turn  
+  function toggleSenderTurn() {
+    if (isSellerTurn()) {
+      chatContainer.append("<div class='mb-2 buyer-message'><strong>Buyer:</strong> Typing...</div>");
+    } else {
+      chatContainer.append("<div class='mb-2 seller-message'><strong>Seller:</strong> Typing...</div>");
+    }
+  }
+});
