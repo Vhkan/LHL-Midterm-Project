@@ -31,7 +31,7 @@
 <body>
 
   <%- include('partials/header') %>
-
+<div id="page-content">
     <div class="container mt-4 cars-filter-container">
       <div class="row">
         <div class="col-md-3 car-filter">
@@ -109,7 +109,7 @@
               </tbody>
             </table>
 
-            <button type="submit" class="btn btn-primary">Apply Filters</button>
+            <button type="submit" class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
           </form>
         </div>
 
@@ -151,6 +151,7 @@
         </div>
       </div>
     </div>
+  </div>
 
 
     <%- include('partials/footer') %>
