@@ -87,6 +87,14 @@ router.route('/contact')
   });
 });
 
+router.route('/contact_seller')
+  .get((req, res) => {
+    res.render('contact_seller')
+  .post((req, res) => {
+    res.send('How can we help you?')
+  });  
+});
+
 router.route('/join')
   .get((req, res) => {
   res.redirect('/contact')
