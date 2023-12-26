@@ -123,3 +123,24 @@ header {
 .message-input {
   margin-top: 20px;
 }
+
+/* constact-seller page */
+.msg-container {
+  padding-top: 100px;
+  padding-bottom: 125px;
+}
+
+.card {
+  background-color: rgba(244, 217, 154, 0.8);
+ 
+}
+.card-header {
+  background-color: rgba(3, 60, 157, 0.8); 
+  color: white;
+}
+.send-btn {
+  background-color: rgba(3, 60, 157, 0.8);
+}
+.send-btn:hover {
+  background-color: #2b77f9;
+} 

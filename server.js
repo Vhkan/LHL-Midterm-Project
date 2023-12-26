@@ -6,9 +6,11 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 
-const PORT = process.env.PORT || 8080;
-const app = express();
 
+// const io = require('socket.io')(3000);
+const PORT = process.env.PORT || 8080;
+
+const app = express();
 app.set('view engine', 'ejs');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -30,6 +32,14 @@ const usersRoutes = require('./routes/users');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/', usersRoutes);
+
+//a func to give each user a socket on connection
+// io.on('connection', socket => {
+//   console.log("New user");
+//   socket.emit('chat-message', "Hi there! How can we help you today?")
+// });
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
