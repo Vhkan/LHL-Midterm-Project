@@ -100,7 +100,8 @@ function updateCarList(cars) {
   cars.forEach((data) => {
     const html = `
       <div class="col-md-3">
-        <div class="card">
+        <div class="card" style="
+        margin-bottom: 300px;>
           <a href="/sell/${data.id}">
             <img src="${data.photo_url_1}" class="card-img-top" alt="image_unavailable">
           </a>
