@@ -41,9 +41,15 @@
                   <td>
                     <select class="form-control" id="filterYear">
                       <option value="">Year</option>
-                      <option value="1950">1950</option>
-                      <option value="1960">1960</option>
-                      <option value="1970">1970</option>
+                      <% const uniqueYear = []; %>
+                      <% data.forEach((item) => { %>
+                      <% if (!uniqueYear.includes(item.year)) { %>
+                      <% uniqueYear.push(item.year) %>
+                      <% } %>
+                      <% }); %>
+                      <% uniqueYear.sort().forEach((year) => { %>
+                        <option value="<%= year %>"><%= year %></option>
+                      <% }); %>
                     </select>
                   </td>
                 </tr>
@@ -51,12 +57,15 @@
                   <td>
                     <select class="form-control" id="filterMake">
                       <option value="">Make</option>
-                      <option value="Chevrolet">Chevrolet</option>
-                      <option value="Dodge">Dodge</option>
-                      <option value="Ford">Ford</option>
-                      <option value="Mercedes">Mercedes</option>
-                      <option value="Pontiac">Pontiac</option>
-                      <option value="Tomaso">Tomaso</option>
+                      <% const uniqueMake = []; %>
+                      <% data.forEach((item) => { %>
+                      <% if (!uniqueMake.includes(item.make)) {%>
+                      <% uniqueMake.push(item.make) %>
+                      <% } %>
+                      <% }); %>
+                      <% uniqueMake.sort().forEach((make) => { %>
+                        <option value="<%= make %>"><%= make %></option>
+                      <% }); %>
                     </select>
                   </td>
                 </tr>
@@ -64,14 +73,15 @@
                   <td>
                     <select class="form-control" id="filterModel">
                       <option value="">Model</option>
-                      <option value="Corvette">Corvette</option>
-                      <option value="Impala">Impala</option>
-                      <option value="Dart">Dart</option>
-                      <option value="Mustang">Mustang</option>
-                      <option value="F100">F100</option>
-                      <option value="280SL">280SL</option>
-                      <option value="Firebird">Firebird</option>
-                      <option value="Pantera">Pantera</option>
+                      <% const uniqueModel = []; %>
+                      <% data.forEach((item) => { %>
+                      <% if (!uniqueModel.includes(item.model)) { %>
+                      <% uniqueModel.push(item.model) %>
+                      <% } %>
+                      <% }); %>
+                      <% uniqueModel.sort().forEach((model) => { %>
+                      <option value="<%= model %>"><%= model %></option>
+                      <% }); %>
                     </select>
                   </td>
                 </tr>
