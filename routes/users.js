@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const { getCars } = require('../db/queries/cars');
+const { getCars, getCar } = require('../db/queries/cars');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
@@ -55,13 +55,21 @@ router.route('/buy')
   });
 });
 
-router.route('/sell')
+router.route('/sell/:id')
   .get((req, res) => {
-  res.render('seller_listing')
+    const id = req.params.id;
+    getCar(id)
+      .then(data => {
+        const carData = data.rows[0];
+        res.render('seller_listing', {car: carData});
+      })
+      .catch((error) => {
+        res.status(500).send('Internal Server Error');
+      })
+  })
   .post((req, res) => {
     res.send('CAR SOLD');
   });
-});
 
 router.route('/service')
   .get((req, res) => {

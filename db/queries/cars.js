@@ -7,7 +7,13 @@ const getCars = () => {
     });
 };
 
+const getCar = (id) => {
+  const stringQuery = [id];
+  return db.query(`SELECT * FROM cars WHERE id = $1;`, stringQuery)
+};
 
 
-
-module.exports = { getCars };
+module.exports = {
+  getCars,
+  getCar
+};

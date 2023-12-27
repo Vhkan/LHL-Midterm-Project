@@ -24,26 +24,29 @@
 <body>
   <%- include('partials/header') %>
 
-  <div class="container mt-4"> 
+  <div class="container mt-4">
     <div class="row justify-content-center align-items-center">
       <!-- Card -->
       <div class="col-md-6 col-12 mb-4">
         <div class="card">
           <div class="card-header text-center">
-            item.year item.model
+            <%= car.year %> <%= car.model %>
+
           </div>
           <ul class="list-group list-group-flush text-center">
-            <li class="list-group-item">item.make</li>
-            <li class="list-group-item">item.color</li>
-            <li class="list-group-item">item.price</li>
-            <li class="list-group-item">item.is_sold</li>
+            <li class="list-group-item">Make: <%= car.make %></li>
+            <li class="list-group-item">Color: <%= car.color %></li>
+            <li class="list-group-item">Price: $<%= car.price %></li>
+            <li class="list-group-item">Odometer: <%= car.odometer %></li>
           </ul>
         </div>
       </div>
 
       <!-- Image -->
       <div class="col-md-6 col-12 mb-4 text-center">
-        <img src="/documents/Chevy Corvette/1-1959-chevrolet-corvette-std.jpg" class="img-fluid custom-card-margin-purchase" alt="image_unavailable">
+        <img src="<%= car.photo_url_1 %>" class="img-fluid custom-card-margin-purchase" alt="image_unavailable">
+        <!-- <img src="<%= car.photo_url_2 %>" class="img-fluid custom-card-margin-purchase" alt="image_unavailable">
+        <img src="<%= car.photo_url_3 %>" class="img-fluid custom-card-margin-purchase" alt="image_unavailable"> -->
       </div>
     </div>
   </div>
