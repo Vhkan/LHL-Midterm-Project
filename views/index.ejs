@@ -106,7 +106,7 @@
             <% data.forEach(item=> { %>
               <div class="col-md-3">
                 <div class="card">
-                  <a href="/contact">
+                  <a href="/sell">
                     <img src="<%= item.photo_url_1 %>" class="card-img-top" alt="image_unavailable">
                   </a>
                   <div class="card-body">
@@ -125,7 +125,7 @@
                     </h6>
                     <h6 class="card-info"><b>Price:</b> $<%= item.price %>
                     </h6>
-                    <a href="/contact" class="btn btn-warning btn-large" role="button">Contact Seller</a>
+                    <a href="/sell" class="btn btn-warning btn-large" role="button">Contact Seller</a>
                   </div>
                 </div>
               </div>
@@ -137,7 +137,7 @@
 
 
     <%- include('partials/footer') %>
-    
+
       <!-- Bootstrap JS -->
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
