@@ -18,7 +18,7 @@
 <!-- Admin/Seller authentication form -->
 
 <% if (admin) { %>
-  Logged in as: <%= admin.id %>
+  <p style="color: #2b77f9;">Logged in as: <b>Admin</b></p>
   <form action="/logout" method="POST">
     <button type="submit" class="btn btn-outline-secondary">Logout</button>
   </form>
