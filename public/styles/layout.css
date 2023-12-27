@@ -1,0 +1,36 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  display: flex;
+  margin-top: auto;
+  justify-content: space-around;
+  background-color: rgba(20, 180, 233, 0.496);
+}
+
+.card {
+  width: 30rem;
+}
+
+.below-social-icons {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 1em;
+}
+
+.footer-section {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* Additional styles for better spacing */
+.below-social-icons {
+  margin-top: 10px;
+}
