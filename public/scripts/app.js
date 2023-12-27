@@ -137,13 +137,13 @@ function updateCarList(cars) {
 
 //Chat on contact_seller page V2
 $(document).ready(function() {
-  const messageInput = $("#messageInput");
-  const chatContainer = $("#chatContainer");
+  const $messageInput = $("#messageInput");
+  const $chatContainer = $("#chatContainer");
 
   $('#send-btn').click(sendMessage);
 
   function sendMessage() {
-    const msg = messageInput.val();
+    const msg = $messageInput.val();
 
     // New message based on the sender (Seller/Buyer)
     const sender = isSellerTurn() ? "Seller" : "Buyer";
@@ -152,10 +152,10 @@ $(document).ready(function() {
     const newMessage = $("<div class='mb-2 " + sender + "-message'><strong>" + sender + ":</strong> " + msg + "</div>");
 
     // Adds a new message to the chat
-    chatContainer.append(newMessage);
+    $chatContainer.append(newMessage);
 
     // Clears the msg input field
-    messageInput.val("");
+    $messageInput.val("");
 
     // Changes the message sender
     toggleSenderTurn();
@@ -173,9 +173,11 @@ $(document).ready(function() {
   // Toggles sender's the turn  
   function toggleSenderTurn() {
     if (isSellerTurn()) {
-      chatContainer.append("<div class='mb-2 buyer-message'><strong>Buyer:</strong> Typing...</div>");
+      $chatContainer.append("<div class='mb-2 buyer-message'><strong>Buyer:</strong> Typing...</div>");
     } else {
-      chatContainer.append("<div class='mb-2 seller-message'><strong>Seller:</strong> Typing...</div>");
+      $chatContainer.append("<div class='mb-2 seller-message'><strong>Seller:</strong> Typing...</div>");
     }
   }
 });
+
+

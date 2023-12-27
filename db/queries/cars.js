@@ -30,7 +30,7 @@ const filterResults = (options) => {
   const max = options.price ? options.price[1] : null;
 
   if (year) {
-    queryParams.push(year);
+    queryParams.push(year);       
     queryString += `AND year = $${queryParams.length}\n`;
   }
 
