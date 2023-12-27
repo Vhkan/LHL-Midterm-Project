@@ -143,10 +143,9 @@ header {
 
 }
 
-.card-header {
+.chat-card {
   background-color: rgba(3, 60, 157, 0.8);
   color: white;
-  margin-top: 2em;
 }
 
 .send-btn {
@@ -182,5 +181,10 @@ header {
 
 .list-group-item {
   background-color: rgba(243, 215, 152, 0.3)
-};
+}
 
+.car-card {
+  background-color: rgba(3, 60, 157, 0.7);
+  color: white;
+  margin-top: 2em;
+}
