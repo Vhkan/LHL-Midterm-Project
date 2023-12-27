@@ -146,6 +146,7 @@ header {
 .card-header {
   background-color: rgba(3, 60, 157, 0.8);
   color: white;
+  margin-top: 2em;
 }
 
 .send-btn {
@@ -159,3 +160,27 @@ header {
 .mark-as-sold {
   padding-top: 0.5em;
 }
+
+.custom-container {
+  max-width: 100%;
+}
+
+.img-thumbnail {
+  padding: 0.1em;
+  background-color: #4a6bae;
+  border: 0.2px solid #232D3F;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  max-height: 100%;
+  height: 400px;
+  width: 600px;
+}
+
+.car-info {
+  background-color: rgba(35, 45, 63, 0.0);
+}
+
+.list-group-item {
+  background-color: rgba(243, 215, 152, 0.3)
+};
+
