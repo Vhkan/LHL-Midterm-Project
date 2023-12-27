@@ -1,36 +1,105 @@
 body {
   display: flex;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
-  min-height: 100vh;
-}
+  background-image: url("/documents/background-image/benga-mavinga-OHyhe3jJ7_0-unsplash.jpg");
+ }
 
-footer {
+header {
   display: flex;
-  margin-top: auto;
-  justify-content: space-around;
-  background-color: rgba(20, 180, 233, 0.496);
+  height: 100%;
+  flex-direction: column;
+  align-items: stretch;
 }
 
-.card {
-  width: 30rem;
-}
-
-.below-social-icons {
+.header-section {
   display: flex;
-  width: 50%;
   align-items: center;
-  justify-content: space-around;
-  margin-bottom: 1em;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  width: 100vw;
+  height: 60px;
+  background-color: #0C356A;
+  padding-top: 0.5em;
 }
 
+.logo {
+  padding-left: 1em;
+  font-size: larger;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1em;
+  margin-right: 1em;
+}
+
+.user-auth {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 1em;
+  gap: 1em;
+}
+
+.home-about-contact{
+  display: flex;
+  padding-right: 7rem;
+  gap: 4em;
+  align-self: center;
+
+}
+
+/* Footer made with grid CSS */
 .footer-section {
-  display: flex;
-  width: 50%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  width: 100vw;
+  background-color: #0C356A;
+  padding: 0 1rem;
 }
 
-/* Additional styles for better spacing */
+.footer-logo {
+  font-size: larger;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5em;
+  padding-top: 0.8rem;
+}
+
 .below-social-icons {
-  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5em;
+  padding-bottom: 0.8rem;
+}
+
+.footer-icons-links {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* contact us */
+.card-img-large {
+  height: 500px;
+  object-fit: cover;
+}
+
+.card-img-small {
+  height: 200px; 
+  object-fit: cover;
 }
