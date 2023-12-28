@@ -11,3 +11,7 @@ INSERT INTO users (first_name, email, password) VALUES ('Ashly', 'aoldershaw6@ma
 INSERT INTO users (first_name, email, password) VALUES ('Adriane', 'akiledal7@oaic.gov.au', '7ou4t`');
 INSERT INTO users (first_name, email, password) VALUES ('Antonina', 'aprestedge8@naver.com', '5(/Wn$');
 INSERT INTO users (first_name, email, password) VALUES ('Jesse', 'jbilbery9@independent.co.uk', '8ad8{');
+
+-- Admin and User credentials
+INSERT INTO users (first_name, email, password) VALUES ('admin', 'admin@email.com', 'password');
+INSERT INTO users (first_name, email, password) VALUES ('user_1', 'user_1@email.com', '123');

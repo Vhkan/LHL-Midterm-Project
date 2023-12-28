@@ -22,6 +22,11 @@
   <form action="/logout" method="POST">
     <button type="submit" class="btn btn-outline-secondary">Logout</button>
   </form>
+<% } else if (user) { %>
+  <p style="color: #2b77f9;">Logged in as: <b>User</b></p>
+  <form action="/logout" method="POST">
+    <button type="submit" class="btn btn-outline-secondary">Logout</button>
+  </form>
 <% } else { %>
   <form action="/login" method="POST">
     <div class="user-auth">
@@ -31,5 +36,6 @@
     </div>
   </form>
 <% } %>
+
 
 </header>
