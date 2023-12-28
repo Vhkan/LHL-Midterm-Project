@@ -25,4 +25,113 @@ $(document).ready(function() {
 
   $(document).on('click', '.heart-icon', favoriteItem);
 
+
+
+  let selectedYear, selectedModel, selectedMake, selectedPrice;
+
+  // capturing values from each filter option
+
+  $('#filterYear').on('change', function() {
+    selectedYear = $(this).val();
+    console.log(selectedYear);
+  });
+
+  $('#filterMake').on('change', function() {
+    selectedMake = $(this).val();
+    console.log(selectedMake);
+  });
+
+  $('#filterModel').on('change', function() {
+    selectedModel = $(this).val();
+    console.log(selectedModel);
+  });
+
+  $('#filterPrice').on('change', function() {
+    selectedPrice = $(this).val();
+
+    if (selectedPrice) {
+      let [min, max] = selectedPrice.split(' ');
+      min = Number(min);
+      max = Number(max);
+      selectedPrice = [min, max];
+    }
+  });
+
+  $('.filter-form').on('submit', function(event) {
+    event.preventDefault();
+
+    // creating object to pass to server side route
+
+    // example object:
+    // const formData = {
+    //  year: 1959,
+    //  make: 'Chevrolet',
+    //  model: 'Corvette',
+    //  price: ['80000', '90000']
+    // };
+
+    const formData = {
+      year: selectedYear,
+      make: selectedMake,
+      model: selectedModel,
+      price: selectedPrice
+    };
+
+    $.ajax({
+      method: 'POST',
+      url: '/filtered',
+      data: formData
+    })
+    .done((response) => {
+      console.log('Success');
+      updateCarList(response);
+      })
+    })
 });
+
+// Empty card container and update HTML with new array of cars from filter
+
+function updateCarList(cars) {
+
+  // class that holds the car information
+
+  const $carList = $('.row.mb-4');
+  $carList.empty();
+
+  //copied HTML format from index.ejs to render same format and styling
+
+  cars.forEach((data) => {
+    const html = `
+      <div class="col-md-3">
+        <div class="card">
+          <a href="/sell/${data.id}">
+            <img src="${data.photo_url_1}" class="card-img-top" alt="image_unavailable">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">
+              ${data.make}
+              ${data.model}
+            </h5>
+            <h6 class="card-info"><b>Year:</b>
+              ${data.year}
+            </h6>
+            <h6 class="card-info"><b>Color:</b>
+              ${data.color}
+            </h6>
+            <h6 class="card-info"><b>Mileage:</b>
+              ${data.odometer}
+            </h6>
+            <h6 class="card-info"><b>Price:</b> $${data.price}
+            </h6>
+            <a href="/contact_seller" class="btn btn-warning btn-md" role="button">Contact Seller</a>
+            <div class="add-to-favs">
+              <!-- When favorite btn is clicked -->
+              <b>Add to Favourites </b><i class="heart-icon fa-solid fa-heart fa-lg"></i>
+            </div>
+
+          </div>
+        </div>
+      </div>`;
+    $carList.append(html);
+  });
+}
