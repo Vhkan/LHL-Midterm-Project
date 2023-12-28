@@ -33,7 +33,7 @@
     <div class="container mt-4 cars-filter-container">
       <div class="row">
         <div class="col-md-3 car-filter">
-          <form>
+          <form class="filter-form" action="/filtered" method="POST">
             <h2>Filter Menu</h2>
             <table class="table">
               <tbody>
@@ -89,18 +89,18 @@
                   <td>
                     <select class="form-control" id="filterPrice">
                       <option value="">Price</option>
-                      <option value="20000">$10,000 - $20,000</option>
-                      <option value="30000">$20,000 - $30,000</option>
-                      <option value="40000">$30,000 - $40,000</option>
-                      <option value="50000">$40,000 - $50,000</option>
-                      <option value="60000">$50,000 - $60,000</option>
-                      <option value="70000">$60,000 - $70,000</option>
-                      <option value="70000">$70,000 - $80,000</option>
-                      <option value="70000">$80,000 - $90,000</option>
-                      <option value="70000">$90,000 - $100,000</option>
-                      <option value="70000">$100,000 - $110,000</option>
-                      <option value="70000">$110,000 - $120,000</option>
-                      <option value="70000">$1200,000 - $130,000</option>
+                      <option value="10000 20000">$10,000 - $20,000</option>
+                      <option value="20000 30000">$20,000 - $30,000</option>
+                      <option value="30000 40000">$30,000 - $40,000</option>
+                      <option value="40000 50000">$40,000 - $50,000</option>
+                      <option value="50000 60000">$50,000 - $60,000</option>
+                      <option value="60000 70000">$60,000 - $70,000</option>
+                      <option value="70000 80000">$70,000 - $80,000</option>
+                      <option value="80000 90000">$80,000 - $90,000</option>
+                      <option value="90000 100000">$90,000 - $100,000</option>
+                      <option value="100000 110000">$100,000 - $110,000</option>
+                      <option value="110000 120000">$110,000 - $120,000</option>
+                      <option value="120000 130000">$120,0000 - $130,000</option>
                     </select>
                   </td>
                 </tr>
@@ -122,7 +122,7 @@
                   <div class="card-body">
                     <h5 class="card-title">
                       <%= item.make %>
-                        <%= item.model %> 
+                        <%= item.model %>
                     </h5>
                     <h6 class="card-info"><b>Year:</b>
                       <%= item.year %>
@@ -140,7 +140,7 @@
                       <!-- When favorite btn is clicked -->
                       <b>Add to Favourites </b><i class="heart-icon fa-solid fa-heart fa-lg"></i>
                     </div>
-                   
+
                   </div>
                 </div>
               </div>
@@ -154,9 +154,9 @@
     <%- include('partials/footer') %>
 
       <!-- Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
