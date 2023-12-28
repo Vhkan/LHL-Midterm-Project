@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const { getCars, getCar } = require('../db/queries/cars');
+const { getCars, getCar, filterResults } = require('../db/queries/cars');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
@@ -15,6 +15,18 @@ router.get('/', (req, res) => {
    res.render('index', {data})
   })
 });
+
+router.route('/filtered')
+  .post((req, res) => {
+    const data = req.body;
+    filterResults(data)
+      .then(data => {
+        res.json(data);
+      })
+      .catch((err) => {
+        res.status(500).json({error: 'Internal Server Error'});
+      });
+  })
 
 router.get('/about', (req, res) => {
   res.render('about');
@@ -92,7 +104,7 @@ router.route('/contact_seller')
     res.render('contact_seller')
   .post((req, res) => {
     res.send('How can we help you?')
-  });  
+  });
 });
 
 router.route('/join')
