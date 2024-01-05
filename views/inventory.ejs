@@ -126,7 +126,12 @@
                 <div class="col-md-3">
                   <div class="card">
                     <a href="/sell/<%= item.id %>">
+                      <% if (item.is_sold) { %>
+                      <img src="/documents/Sold/SOLD.jpg" class="card-img-top"
+                      alt="image_unavailable">
+                      <% } else { %>
                       <img src="<%= item.photo_url_1 %>" class="card-img-top" alt="image_unavailable">
+                      <% } %>
                     </a>
                     <div class="card-body">
                       <h5 class="card-title">
@@ -150,8 +155,8 @@
                         <input type="hidden" name="itemId" value="<%= item.id  %>">
                         <button type="submit" class="btn btn-danger btn-md">Delete an Item</button>
                       </form>
-                      
 
+                      <% if (!item.is_sold) { %>
                       <div class="mark-as-sold">
                         <!-- When mark as sold btn is clicked -->
                         <div class="form-check">
@@ -159,6 +164,7 @@
                           <b>Mark as Sold</b>
                         </div>
                       </div>
+                      <% } %>
                     </div>
                   </div>
                 </div>
