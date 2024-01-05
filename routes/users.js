@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const { getCars, getCar, filterResults, deleteCar } = require('../db/queries/cars');
+const { getCars, getCar, filterResults, deleteCar, markCarAsSold } = require('../db/queries/cars');
 const router = express.Router();
 
 //Admin login data
@@ -109,11 +109,18 @@ router.route('/sell/:id')
         res.render('seller_listing', { car: carData, admin: req.session.admin })
       })
       .catch((error) => {
-        res.status(500).send('Internal Server Error');
+        res.status(500).send('Internal Server Error', error);
       })
   })
   .post((req, res) => {
-    res.send('CAR SOLD');
+    const carId = req.body.itemId;
+    markCarAsSold(carId)
+      .then(data => {
+        res.json(data);
+      })
+      .catch((error) => {
+        res.status(500).send('Internal Server Error', error);
+      })
   });
 
 
