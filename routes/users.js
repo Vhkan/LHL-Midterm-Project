@@ -46,8 +46,6 @@ router.get('/about', (req, res) => {
   res.render('about', { admin: req.session.admin });
 });
 
-/* we are able to chain routes using ".route" like below to avoid duplicating lines of code and avoid typos. Article is near the bottom of the page. Link to documentation
-https://expressjs.com/en/guide/routing.html*/
 
 router.route('/login')
   .post((req, res) => {
@@ -77,9 +75,9 @@ router.route('/logout')
   });
 
 
-//Admin page with all inventory listed, where an admin can mark an item 
-//as sold/delete/archive or post a new item 
-//Send messages via app/email or text back on negotiations in buying the said item 
+//Admin page with all inventory listed, where an admin can mark an item
+//as sold/delete/archive or post a new item
+//Send messages via app/email or text back on negotiations in buying the said item
 router.route('/inventory')
   .get((req, res) => {
     getCars()
@@ -98,7 +96,7 @@ router.route('/inventory')
     });
   })
    .delete((req, res) => {
-    res.status(500).send('Method is not allowed') 
+    res.status(500).send('Method is not allowed')
   });
 
 
@@ -122,25 +120,25 @@ router.route('/sell/:id')
 router.route('/contact')
   .get((req, res) => {
     res.redirect('contact_seller')
-      .post((req, res) => {
-        res.send('THANKS FOR THE REVIEW');
-      });
+  .post((req, res) => {
+    res.send('THANKS FOR THE REVIEW');
+    });
   });
 
 router.route('/contact_seller')
   .get((req, res) => {
     res.render('contact_seller', { admin: req.session.admin })
-      .post((req, res) => {
-        res.send('How can we help you?')
-      });
+  .post((req, res) => {
+    res.send('How can we help you?')
+    });
   });
 
 router.route('/join')
   .get((req, res) => {
     res.redirect('/contact', { admin: req.session.admin })
-      .post((req, res) => {
-        res.resend('YOU GOT A JOB');
-      })
+  .post((req, res) => {
+    res.resend('YOU GOT A JOB');
+    })
   });
 
 module.exports = router;
