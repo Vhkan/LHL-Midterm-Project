@@ -144,7 +144,14 @@
                       </h6>
                       <h6 class="card-info"><b>Price:</b> $<%= item.price %>
                       </h6>
-                      <a href="/contact_seller" class="btn btn-danger btn-md" role="button">Delete an Item</a>
+
+                      <!-- Delete an item -->
+                      <form action="/inventory" method="POST">
+                        <input type="hidden" name="itemId" value="<%= item.id  %>">
+                        <button type="submit" class="btn btn-danger btn-md">Delete an Item</button>
+                      </form>
+                      
+
                       <div class="mark-as-sold">
                         <!-- When mark as sold btn is clicked -->
                         <div class="form-check">

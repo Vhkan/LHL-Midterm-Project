@@ -6,8 +6,8 @@
  */
 
 const express = require('express');
-const { getCars, getCar, filterResults } = require('../db/queries/cars');
-const router  = express.Router();
+const { getCars, getCar, filterResults, deleteCar } = require('../db/queries/cars');
+const router = express.Router();
 
 //Admin login data
 const adminCredentials = {
@@ -25,9 +25,9 @@ router.get('/', (req, res) => {
       })
   }
   getCars()
-  .then(data => {
-   res.render('index', {data, admin: req.session.admin})
-  })
+    .then(data => {
+      res.render('index', { data, admin: req.session.admin })
+    })
 });
 
 router.route('/filtered')
@@ -38,12 +38,12 @@ router.route('/filtered')
         res.json(data);
       })
       .catch((err) => {
-        res.status(500).json({error: 'Internal Server Error'});
+        res.status(500).json({ error: 'Internal Server Error' });
       });
   })
 
 router.get('/about', (req, res) => {
-  res.render('about', {admin: req.session.admin});
+  res.render('about', { admin: req.session.admin });
 });
 
 /* we are able to chain routes using ".route" like below to avoid duplicating lines of code and avoid typos. Article is near the bottom of the page. Link to documentation
@@ -77,16 +77,30 @@ router.route('/logout')
   });
 
 
-  //Admin page with all inventory listed, where an admin can mark an item 
-  //as sold/delete/archive or post a new item 
-  //Send messages via app/email or text back on negotiations in buying the said item 
+//Admin page with all inventory listed, where an admin can mark an item 
+//as sold/delete/archive or post a new item 
+//Send messages via app/email or text back on negotiations in buying the said item 
 router.route('/inventory')
   .get((req, res) => {
     getCars()
-    .then(data => {
-     res.render('inventory', {data, admin: req.session.admin})
+      .then(data => {
+        res.render('inventory', { data, admin: req.session.admin })
+      })
+  })
+  .post((req, res) => {
+    const itemToDel = req.body.itemId;
+    deleteCar(itemToDel)
+    .then(() => {
+      res.redirect('/inventory');
     })
-});
+    .catch(err => {
+      res.status(500).send({success: false, error: err.message});
+    });
+  })
+   .delete((req, res) => {
+    res.status(500).send('Method is not allowed') 
+  });
+
 
 router.route('/sell/:id')
   .get((req, res) => {
@@ -94,7 +108,7 @@ router.route('/sell/:id')
     getCar(id)
       .then(data => {
         const carData = data.rows[0];
-        res.render('seller_listing', {car: carData, admin: req.session.admin})
+        res.render('seller_listing', { car: carData, admin: req.session.admin })
       })
       .catch((error) => {
         res.status(500).send('Internal Server Error');
@@ -107,26 +121,26 @@ router.route('/sell/:id')
 
 router.route('/contact')
   .get((req, res) => {
-  res.redirect('contact_seller')
-  .post((req, res) => {
-    res.send('THANKS FOR THE REVIEW');
+    res.redirect('contact_seller')
+      .post((req, res) => {
+        res.send('THANKS FOR THE REVIEW');
+      });
   });
-});
 
 router.route('/contact_seller')
   .get((req, res) => {
-    res.render('contact_seller', {admin: req.session.admin})
-  .post((req, res) => {
-    res.send('How can we help you?')
+    res.render('contact_seller', { admin: req.session.admin })
+      .post((req, res) => {
+        res.send('How can we help you?')
+      });
   });
-});
 
 router.route('/join')
   .get((req, res) => {
-  res.redirect('/contact', {admin: req.session.admin})
-  .post((req, res) => {
-    res.resend('YOU GOT A JOB');
-  })
-});
+    res.redirect('/contact', { admin: req.session.admin })
+      .post((req, res) => {
+        res.resend('YOU GOT A JOB');
+      })
+  });
 
 module.exports = router;

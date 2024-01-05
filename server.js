@@ -40,11 +40,6 @@ app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/', usersRoutes);
 
-//a func to give each user a socket on connection
-// io.on('connection', socket => {
-//   console.log("New user");
-//   socket.emit('chat-message', "Hi there! How can we help you today?")
-// });
 
 
 

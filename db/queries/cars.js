@@ -68,9 +68,18 @@ const filterResults = (options) => {
     });
 };
 
+//Delete a car
+const deleteCar = (id) => {
+  return db.query('DELETE FROM cars WHERE id = $1 RETURNING *;', [id])
+  .then(data => {
+    return data.rows[0];
+  });
+};
+
 
 module.exports = {
   getCars,
   getCar,
-  filterResults
+  filterResults,
+  deleteCar
 };
