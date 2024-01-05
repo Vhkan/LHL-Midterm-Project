@@ -1,6 +1,7 @@
 // Client facing scripts here
 
 $(document).ready(function() {
+
   console.log('Client works');
 
   //Delegation when a favorite btn is clicked
@@ -21,8 +22,6 @@ $(document).ready(function() {
     }
   }
   $(document).on('click', '.heart-icon', favoriteItem);
-
-});
 
 let selectedYear, selectedModel, selectedMake, selectedPrice;
 
@@ -81,14 +80,45 @@ $('.filter-form').on('submit', function(event) {
   })
     .done((response) => {
       console.log('Success');
-      updateCarList(response);
+      updateCarList(response, false);
     })
 })
 
 
 // Empty card container and update HTML with new array of cars from filter
+/**
+ * updateCarList
+ * @param {Array} cars - An array of car objects.
+ * @param {boolean} isAdmin - true if admin html render, false for user html render
+ */
+function updateCarList(cars, isAdmin) {
 
-function updateCarList(cars) {
+  // ADMIN html
+
+  const adminHtml = `
+            <!-- Delete an item -->
+            <form action="/inventory" method="POST">
+              <input type="hidden" name="itemId" value="<%= item.id  %>">
+              <button type="submit" class="btn btn-danger btn-md">Delete an Item</button>
+            </form>
+
+
+            <div class="mark-as-sold">
+              <!-- When mark as sold btn is clicked -->
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="exampleCheckbox">
+                <b>Mark as Sold</b>
+              </div>
+            </div>
+            `;
+
+  // USER html
+  const userHtml = `
+            <a href="/contact_seller" class="btn btn-warning btn-md" role="button">Contact Seller</a>
+            <div class="add-to-favs">
+              <!-- When favorite btn is clicked -->
+              <b>Add to Favourites </b><i class="heart-icon fa-solid fa-heart fa-lg"></i>
+            </div>`;
 
   // class that holds the car information
 
@@ -98,11 +128,12 @@ function updateCarList(cars) {
   //copied HTML format from index.ejs to render same format and styling
 
   cars.forEach((data) => {
+    const imgUrl = data.is_sold ? '/documents/Sold/SOLD.jpg' : data.photo_url_1;
     const html = `
       <div class="col-md-3">
         <div class="card">
           <a href="/sell/${data.id}">
-            <img src="${data.photo_url_1}" class="card-img-top" alt="image_unavailable">
+            <img src="${imgUrl}" class="card-img-top" alt="image_unavailable">
           </a>
           <div class="card-body">
             <h5 class="card-title">
@@ -120,11 +151,7 @@ function updateCarList(cars) {
             </h6>
             <h6 class="card-info"><b>Price:</b> $${data.price}
             </h6>
-            <a href="/contact_seller" class="btn btn-warning btn-md" role="button">Contact Seller</a>
-            <div class="add-to-favs">
-              <!-- When favorite btn is clicked -->
-              <b>Add to Favourites </b><i class="heart-icon fa-solid fa-heart fa-lg"></i>
-            </div>
+            ${isAdmin ? adminHtml : userHtml}
 
           </div>
         </div>
@@ -136,7 +163,7 @@ function updateCarList(cars) {
 
 
 //Chat on contact_seller page V2
-$(document).ready(function() {
+
   const $messageInput = $("#messageInput");
   const $chatContainer = $("#chatContainer");
 
@@ -170,7 +197,7 @@ $(document).ready(function() {
       return false; // It's buyer's turn
     }
   }
-  // Toggles sender's the turn  
+  // Toggles sender's the turn
   function toggleSenderTurn() {
     if (isSellerTurn()) {
       $chatContainer.append("<div class='mb-2 buyer-message'><strong>Buyer:</strong> Typing...</div>");
@@ -178,6 +205,26 @@ $(document).ready(function() {
       $chatContainer.append("<div class='mb-2 seller-message'><strong>Seller:</strong> Typing...</div>");
     }
   }
-});
 
+  // SOLD checkbox
+  $(document).ready(function() {
+    $('.row.mb-4').on('change','.form-check-input', function() {
+      console.log('checkbox changed!');
+      const itemId = $(this).closest('.card-body').find('input[name="itemId"]').val();
 
+      $.ajax ({
+        method: 'POST',
+        url: `/sell/${itemId}`,
+        data: {itemId: itemId}
+      })
+        .done(response => {
+          console.log('success');
+          updateCarList(response, true);
+          location.reload();
+        })
+        .fail(error => {
+          console.log(`Error: ${error}`);
+        });
+    });
+  });
+})
