@@ -30,7 +30,7 @@ const filterResults = (options) => {
   const max = options.price ? options.price[1] : null;
 
   if (year) {
-    queryParams.push(year);       
+    queryParams.push(year);
     queryString += `AND year = $${queryParams.length}\n`;
   }
 
@@ -76,10 +76,22 @@ const deleteCar = (id) => {
   });
 };
 
+const markCarAsSold = (id) => {
+  return db.query(`
+  UPDATE cars
+  SET is_sold = true
+  WHERE id = ${id};`)
+  .then(() => getCars())
+  .then(data => {
+    return data;
+  });
+}
+
 
 module.exports = {
   getCars,
   getCar,
   filterResults,
-  deleteCar
+  deleteCar,
+  markCarAsSold
 };
