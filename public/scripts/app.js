@@ -207,7 +207,7 @@ function updateCarList(cars, isAdmin) {
   }
 
   // SOLD checkbox
-  $(document).ready(function() {
+  
     $('.row.mb-4').on('change','.form-check-input', function() {
       console.log('checkbox changed!');
       const itemId = $(this).closest('.card-body').find('input[name="itemId"]').val();
@@ -226,5 +226,4 @@ function updateCarList(cars, isAdmin) {
           console.log(`Error: ${error}`);
         });
     });
-  });
 })
