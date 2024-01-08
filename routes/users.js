@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const { getCars, getCar, filterResults, deleteCar, markCarAsSold } = require('../db/queries/cars');
+const { getCars, getCar, filterResults, deleteCar, markCarAsSold, addCar } = require('../db/queries/cars');
 const router = express.Router();
 
 //Admin login data
@@ -98,6 +98,19 @@ router.route('/inventory')
    .delete((req, res) => {
     res.status(500).send('Method is not allowed')
   });
+
+  router.route('/inventory/list_new')
+    .get((req, res) => {
+      req.session.admin
+      res.render('list_new', { admin: req.session.admin});
+    })
+    .post((req, res) => {
+      const formData = req.body;
+      addCar(formData);
+      console.log(req.body);
+      console.log('success');
+      res.redirect('/inventory');
+    })
 
 
 router.route('/sell/:id')
