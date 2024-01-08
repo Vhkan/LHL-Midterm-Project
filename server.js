@@ -31,11 +31,15 @@ app.use(express.static('public'));
 // Note: Feel free to replace the example routes below with your own
 
 const usersRoutes = require('./routes/users');
+const inventoryRoutes = require('./routes/inventory');
+const sellRoutes = require('./routes/sell');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/', usersRoutes);
+app.use('/inventory', inventoryRoutes);
+app.use('/sell', sellRoutes);
 
 
 

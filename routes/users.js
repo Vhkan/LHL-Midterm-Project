@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const { getCars, getCar, filterResults, deleteCar, markCarAsSold } = require('../db/queries/cars');
+const { getCars, filterResults} = require('../db/queries/cars');
 const router = express.Router();
 
 //Admin login data
@@ -16,11 +16,11 @@ const adminCredentials = {
   password: "password"
 };
 
-
+//TODO: check if we need to use data in the promise
 router.get('/', (req, res) => {
   if (req.session.admin) {
     getCars()
-      .then(data => {
+      .then((data) => {
         res.redirect('/inventory');
       })
   }
@@ -74,62 +74,9 @@ router.route('/logout')
     res.redirect('/');
   });
 
-
-//Admin page with all inventory listed, where an admin can mark an item
-//as sold/delete/archive or post a new item
-//Send messages via app/email or text back on negotiations in buying the said item
-router.route('/inventory')
-  .get((req, res) => {
-    getCars()
-      .then(data => {
-        res.render('inventory', { data, admin: req.session.admin })
-      })
-  })
-  .post((req, res) => {
-    const itemToDel = req.body.itemId;
-    deleteCar(itemToDel)
-    .then(() => {
-      res.redirect('/inventory');
-    })
-    .catch(err => {
-      res.status(500).send({success: false, error: err.message});
-    });
-  })
-   .delete((req, res) => {
-    res.status(500).send('Method is not allowed')
-  });
-
-
-router.route('/sell/:id')
-  .get((req, res) => {
-    const id = req.params.id;
-    getCar(id)
-      .then(data => {
-        const carData = data.rows[0];
-        res.render('seller_listing', { car: carData, admin: req.session.admin })
-      })
-      .catch((error) => {
-        res.status(500).send('Internal Server Error', error);
-      })
-  })
-  .post((req, res) => {
-    const carId = req.body.itemId;
-    markCarAsSold(carId)
-      .then(data => {
-        res.json(data);
-      })
-      .catch((error) => {
-        res.status(500).send('Internal Server Error', error);
-      })
-  });
-
-
 router.route('/contact')
   .get((req, res) => {
     res.redirect('contact_seller')
-  .post((req, res) => {
-    res.send('THANKS FOR THE REVIEW');
-    });
   });
 
 router.route('/contact_seller')
