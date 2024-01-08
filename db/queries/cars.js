@@ -87,11 +87,51 @@ const markCarAsSold = (id) => {
   });
 }
 
+const addCar = (options) => {
+  const make = options.make;
+  const model = options.model;
+  const year = options.year;
+  const color = options.color;
+  const odometer = options.odometer;
+  const price = options.price;
+  const photo_1 = options.photo_1;
+  const photo_2 = options.photo_2;
+  const photo_3 = options.photo_3;
+
+  const queryParams = [];
+  queryParams.push(make, model, parseInt(year), color, parseInt(odometer), parseInt(price), photo_1 || null, photo_2 || null, photo_3 || null);
+  let queryString = `
+  INSERT INTO cars (make, model, year, color, odometer, price, photo_url_1, photo_url_2, photo_url_3)
+  VALUES ($${queryParams.length},
+          $${queryParams.length},
+          $${queryParams.length},
+          $${queryParams.length},
+          $${queryParams.length},
+          $${queryParams.length},
+          $${queryParams.length},
+          $${queryParams.length},
+          $${queryParams.length})`;
+
+  queryParams.push(make, model, year, color, odometer, price, photo_1 || null, photo_2 || null, photo_3 || null);
+
+  queryString += `;`;
+
+  return db.query(queryString, queryParams)
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+};
+
+
 
 module.exports = {
   getCars,
   getCar,
   filterResults,
   deleteCar,
-  markCarAsSold
+  markCarAsSold,
+  addCar
 };
