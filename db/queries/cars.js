@@ -98,23 +98,22 @@ const addCar = (options) => {
   const photo_2 = options.photo_2;
   const photo_3 = options.photo_3;
 
-  const queryParams = [];
-  queryParams.push(make, model, parseInt(year), color, parseInt(odometer), parseInt(price), photo_1 || null, photo_2 || null, photo_3 || null);
+  const queryParams = [
+    make,
+    model,
+    year,
+    color,
+    odometer,
+    price,
+    photo_1 || null,
+    photo_2 || null,
+    photo_3 || null,
+  ];
+
   let queryString = `
-  INSERT INTO cars (make, model, year, color, odometer, price, photo_url_1, photo_url_2, photo_url_3)
-  VALUES ($${queryParams.length},
-          $${queryParams.length},
-          $${queryParams.length},
-          $${queryParams.length},
-          $${queryParams.length},
-          $${queryParams.length},
-          $${queryParams.length},
-          $${queryParams.length},
-          $${queryParams.length})`;
-
-  queryParams.push(make, model, year, color, odometer, price, photo_1 || null, photo_2 || null, photo_3 || null);
-
-  queryString += `;`;
+    INSERT INTO cars (make, model, year, color, odometer, price, photo_url_1, photo_url_2, photo_url_3)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    RETURNING *;`;
 
   return db.query(queryString, queryParams)
     .then(data => {
@@ -122,7 +121,7 @@ const addCar = (options) => {
     })
     .catch(err => {
       console.log(err.message);
-    })
+    });
 };
 
 
