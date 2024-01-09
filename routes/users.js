@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const { getCars, filterResults} = require('../db/queries/cars');
+const { getCars, filterResults } = require('../db/queries/cars');
 const router = express.Router();
 
 //Admin login data
@@ -16,11 +16,10 @@ const adminCredentials = {
   password: "password"
 };
 
-//TODO: check if we need to use data in the promise
 router.get('/', (req, res) => {
   if (req.session.admin) {
     getCars()
-      .then((data) => {
+      .then(() => {
         res.redirect('/inventory');
       })
   }
@@ -51,11 +50,6 @@ router.route('/login')
   .post((req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    const adminCredentials = {
-      id: "superAdmin",
-      email: "admin@email.com",
-      password: "password"
-    };
 
     //Checking users credentials
     if (email === '' || password === '') {
@@ -74,11 +68,6 @@ router.route('/logout')
     res.redirect('/');
   });
 
-router.route('/contact')
-  .get((req, res) => {
-    res.redirect('contact_seller')
-  });
-
 router.route('/contact_seller')
   .get((req, res) => {
     res.render('contact_seller', { admin: req.session.admin })
@@ -90,9 +79,6 @@ router.route('/contact_seller')
 router.route('/join')
   .get((req, res) => {
     res.redirect('/contact', { admin: req.session.admin })
-  .post((req, res) => {
-    res.resend('YOU GOT A JOB');
-    })
   });
 
 module.exports = router;
