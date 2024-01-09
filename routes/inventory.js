@@ -5,6 +5,9 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
+    if (!req.session.admin) {
+      res.redirect('/');
+    }
     getCars()
       .then(data => {
         res.render('inventory', { data, admin: req.session.admin })
@@ -26,13 +29,14 @@ router.route('/')
 
 router.route('/list_new')
   .get((req, res) => {
-    req.session.admin
+    if (!req.session.admin) {
+      res.redirect('/');
+    }
     res.render('list_new', { admin: req.session.admin});
   })
   .post((req, res) => {
     const formData = req.body;
     addCar(formData);
-    console.log(req.body);
     console.log('success');
     res.redirect('/inventory');
   });
