@@ -9,7 +9,7 @@ router.route('/:id')
     getCar(id)
       .then(data => {
         const carData = data.rows[0];
-        res.render('seller_listing', { car: carData, admin: req.session.admin })
+        res.render('seller_listing', { car: carData, admin: req.session.admin, user: req.session.user })
       })
       .catch((error) => {
         res.status(500).send('Internal Server Error', error);

@@ -104,19 +104,27 @@ router.route('/join')
     res.redirect('/contact', { admin: req.session.admin, user: req.session.user })
   });
 
+
 router.route('/favorites')
-  .post((req, res) => {
-    console.log('this is the route', req.body);
-    const { itemId } = req.body;
+  .post(async (req, res) => {
+    try {
+      const { itemId } = req.body;
+      console.log("Favourited ItemID is:", itemId);
 
-    console.log('this is userCredentials', userCredentials);
+      // Parameterized query to prevent SQL injection
+      const userEmail = userCredentials.email;
+      const userData = await getUsersId(userEmail);
+      
+      console.log('User ID favorited and item is:', userData);
 
-    //TODO: FIGURE OUT QUERY, WORK ON AJAX TO GET FAVORITES
-    
-    getUsersId(userCredentials.email)
-      .then((data) => {
-        console.log(data);
-      })
-  })
+      res.status(200).json({ success: true });
+    } catch (error) {
+      console.log('Error in /favorites POST:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
 
 module.exports = router;
+
+

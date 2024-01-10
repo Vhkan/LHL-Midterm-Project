@@ -23,6 +23,7 @@ $(document).ready(function() {
   }
   $(document).on('click', '.heart-icon', favoriteItem);
 
+
 let selectedYear, selectedModel, selectedMake, selectedPrice;
 
 // capturing values from each filter option
@@ -234,8 +235,7 @@ function updateCarList(cars, isAdmin) {
       const itemId = card.find('a').attr('href').split('/').pop();
 
       const favoriteData = {
-        itemId: itemId,
-
+        itemId: itemId
       };
 
       $.ajax({
