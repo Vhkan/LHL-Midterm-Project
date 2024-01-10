@@ -7,6 +7,7 @@
 
 const express = require('express');
 const { getCars, filterResults } = require('../db/queries/cars');
+const { getUsersId } = require('../db/queries/users');
 const router = express.Router();
 
 //Admin login data
@@ -18,42 +19,24 @@ const adminCredentials = {
 
 //User login data
 const userCredentials = {
-  id: "user_1",
+  first_name: "user_1",
   email: "user_1@email.com",
   password: "123"
 };
 
 
 router.get('/', (req, res) => {
-
-  let userType = req.session.admin ? 'admin' : req.session.user ? 'user' : null;
-
-  if (userType) {
+  if (req.session.admin) {
     getCars()
-      .then(data => {
-        if (userType === 'admin') {
-          res.redirect('/inventory');
-        } else if (userType === 'user') {
-          res.redirect('/buyer_listing');
-        } else {
-          res.render('index', { data, admin: req.session.admin, user: req.session.user });
-        }
-      })
-      .catch(error => {
-        console.error("Error is:", error);
-        res.status(500).send("Server Error");
+      .then(() => {
+        res.redirect('/inventory');
       });
-  } else {
-    getCars()
-      .then(data => {
-        res.render('index', { data, admin: req.session.admin, user: req.session.user });
-      })
-      .catch(error => {
-        console.error("Error is:", error);
-        res.status(500).send("Server Error");
-      });
-  }
-});
+    }
+  getCars()
+    .then(data => {
+      res.render('index', { data, admin: req.session.admin, user: req.session.user })
+    })
+  });
 
 
 router.route('/filtered')
@@ -88,7 +71,7 @@ router.route('/login')
     }
     if (email === userCredentials.email && password === userCredentials.password) {
       req.session.user = true;
-      return res.redirect('/buyer_listing');
+      return res.redirect('/');
     } else {
       res.send("Incorrect Password");
     }
@@ -120,5 +103,20 @@ router.route('/join')
   .get((req, res) => {
     res.redirect('/contact', { admin: req.session.admin, user: req.session.user })
   });
+
+router.route('/favorites')
+  .post((req, res) => {
+    console.log('this is the route', req.body);
+    const { itemId } = req.body;
+
+    console.log('this is userCredentials', userCredentials);
+
+    //TODO: FIGURE OUT QUERY, WORK ON AJAX TO GET FAVORITES
+    
+    getUsersId(userCredentials.email)
+      .then((data) => {
+        console.log(data);
+      })
+  })
 
 module.exports = router;

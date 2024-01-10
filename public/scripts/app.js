@@ -84,7 +84,6 @@ $('.filter-form').on('submit', function(event) {
     })
 })
 
-
 // Empty card container and update HTML with new array of cars from filter
 /**
  * updateCarList
@@ -207,7 +206,7 @@ function updateCarList(cars, isAdmin) {
   }
 
   // SOLD checkbox
-  
+
     $('.row.mb-4').on('change','.form-check-input', function() {
       console.log('checkbox changed!');
       const itemId = $(this).closest('.card-body').find('input[name="itemId"]').val();
@@ -225,5 +224,32 @@ function updateCarList(cars, isAdmin) {
         .fail(error => {
           console.log(`Error: ${error}`);
         });
+    });
+
+    $('.card-body').on('click', '.heart-icon', function () {
+      // Find the closest parent card element
+      const card = $(this).closest('.card');
+
+      // Extract item.id from the href attribute
+      const itemId = card.find('a').attr('href').split('/').pop();
+
+      const favoriteData = {
+        itemId: itemId,
+
+      };
+
+      $.ajax({
+        method: 'POST',
+        url: '/favorites',
+        data: favoriteData,
+        success: function (response) {
+          // Handle the success response
+          console.log(response);
+        },
+        error: function (error) {
+          // Handle the error response
+          console.error(error);
+        }
+      });
     });
 })
