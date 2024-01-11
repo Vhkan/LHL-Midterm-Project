@@ -24,78 +24,78 @@ $(document).ready(function() {
   $(document).on('click', '.heart-icon', favoriteItem);
 
 
-let selectedYear, selectedModel, selectedMake, selectedPrice;
+  let selectedYear, selectedModel, selectedMake, selectedPrice;
 
-// capturing values from each filter option
+  // capturing values from each filter option
 
-$('#filterYear').on('change', function() {
-  selectedYear = $(this).val();
-  console.log(selectedYear);
-});
+  $('#filterYear').on('change', function() {
+    selectedYear = $(this).val();
+    console.log(selectedYear);
+  });
 
-$('#filterMake').on('change', function() {
-  selectedMake = $(this).val();
-  console.log(selectedMake);
-});
+  $('#filterMake').on('change', function() {
+    selectedMake = $(this).val();
+    console.log(selectedMake);
+  });
 
-$('#filterModel').on('change', function() {
-  selectedModel = $(this).val();
-  console.log(selectedModel);
-});
+  $('#filterModel').on('change', function() {
+    selectedModel = $(this).val();
+    console.log(selectedModel);
+  });
 
-$('#filterPrice').on('change', function() {
-  selectedPrice = $(this).val();
+  $('#filterPrice').on('change', function() {
+    selectedPrice = $(this).val();
 
-  if (selectedPrice) {
-    let [min, max] = selectedPrice.split(' ');
-    min = Number(min);
-    max = Number(max);
-    selectedPrice = [min, max];
-  }
-});
+    if (selectedPrice) {
+      let [min, max] = selectedPrice.split(' ');
+      min = Number(min);
+      max = Number(max);
+      selectedPrice = [min, max];
+    }
+  });
 
-$('.filter-form').on('submit', function(event) {
-  event.preventDefault();
+  $('.filter-form').on('submit', function(event) {
+    event.preventDefault();
 
-  // creating object to pass to server side route
+    // creating object to pass to server side route
 
-  // example object:
-  // const formData = {
-  //  year: 1959,
-  //  make: 'Chevrolet',
-  //  model: 'Corvette',
-  //  price: ['80000', '90000']
-  // };
+    // example object:
+    // const formData = {
+    //  year: 1959,
+    //  make: 'Chevrolet',
+    //  model: 'Corvette',
+    //  price: ['80000', '90000']
+    // };
 
-  const formData = {
-    year: selectedYear,
-    make: selectedMake,
-    model: selectedModel,
-    price: selectedPrice
-  };
+    const formData = {
+      year: selectedYear,
+      make: selectedMake,
+      model: selectedModel,
+      price: selectedPrice
+    };
 
-  $.ajax({
-    method: 'POST',
-    url: '/filtered',
-    data: formData
-  })
-    .done((response) => {
-      console.log('Success');
-      updateCarList(response, false);
+    $.ajax({
+      method: 'POST',
+      url: '/filtered',
+      data: formData
     })
-})
+      .done((response) => {
+        console.log('Success');
+        updateCarList(response, false);
+      })
+  })
 
-// Empty card container and update HTML with new array of cars from filter
-/**
- * updateCarList
- * @param {Array} cars - An array of car objects.
- * @param {boolean} isAdmin - true if admin html render, false for user html render
- */
-function updateCarList(cars, isAdmin) {
+  // Empty card container and update HTML with new array of cars from filter
+  /**
+   * updateCarList
+   * @param {Array} cars - An array of car objects.
+   * @param {boolean} isAdmin - true if admin html render, false for user html render
+   */
+  function updateCarList(cars, isAdmin) {
 
-  // ADMIN html
+    // ADMIN html
 
-  const adminHtml = `
+    const adminHtml = `
             <!-- Delete an item -->
             <form action="/inventory" method="POST">
               <input type="hidden" name="itemId" value="<%= item.id  %>">
@@ -112,24 +112,24 @@ function updateCarList(cars, isAdmin) {
             </div>
             `;
 
-  // USER html
-  const userHtml = `
+    // USER html
+    const userHtml = `
             <a href="/contact_seller" class="btn btn-warning btn-md" role="button">Contact Seller</a>
             <div class="add-to-favs">
               <!-- When favorite btn is clicked -->
               <b>Add to Favourites </b><i class="heart-icon fa-solid fa-heart fa-lg"></i>
             </div>`;
 
-  // class that holds the car information
+    // class that holds the car information
 
-  const $carList = $('.row.mb-4');
-  $carList.empty();
+    const $carList = $('.row.mb-4');
+    $carList.empty();
 
-  //copied HTML format from index.ejs to render same format and styling
+    //copied HTML format from index.ejs to render same format and styling
 
-  cars.forEach((data) => {
-    const imgUrl = data.is_sold ? '/documents/Sold/SOLD.jpg' : data.photo_url_1;
-    const html = `
+    cars.forEach((data) => {
+      const imgUrl = data.is_sold ? '/documents/Sold/SOLD.jpg' : data.photo_url_1;
+      const html = `
       <div class="col-md-3">
         <div class="card">
           <a href="/sell/${data.id}">
@@ -156,13 +156,13 @@ function updateCarList(cars, isAdmin) {
           </div>
         </div>
       </div>`;
-    $carList.append(html);
-  });
-}
+      $carList.append(html);
+    });
+  }
 
 
 
-//Chat on contact_seller page V2
+  //Chat on contact_seller page V2
 
   const $messageInput = $("#messageInput");
   const $chatContainer = $("#chatContainer");
@@ -208,56 +208,91 @@ function updateCarList(cars, isAdmin) {
 
   // SOLD checkbox
 
-    $('.row.mb-4').on('change','.form-check-input', function() {
-      console.log('checkbox changed!');
-      const itemId = $(this).closest('.card-body').find('input[name="itemId"]').val();
+  $('.row.mb-4').on('change', '.form-check-input', function() {
+    console.log('checkbox changed!');
+    const itemId = $(this).closest('.card-body').find('input[name="itemId"]').val();
 
-      $.ajax ({
-        method: 'POST',
-        url: `/sell/${itemId}`,
-        data: {itemId: itemId}
+    $.ajax({
+      method: 'POST',
+      url: `/sell/${itemId}`,
+      data: { itemId: itemId }
+    })
+      .done(response => {
+        console.log('success');
+        updateCarList(response, true);
+        location.reload();
       })
-        .done(response => {
-          console.log('success');
-          updateCarList(response, true);
-          location.reload();
+      .fail(error => {
+        console.log(`Error: ${error}`);
+      });
+  });
+
+
+  
+  //Favorite an item
+  $('.card-body').on('click', '.heart-icon', function() {
+    // Find the closest parent card element
+    const card = $(this).closest('.card');
+
+    // Extract item.id from the href attribute
+    const itemId = card.find('a').attr('href').split('/').pop();
+
+    const favoriteData = {
+      carId: itemId
+    };
+    $.ajax({
+      method: 'POST',
+      url: '/favorites',
+      data: favoriteData,
+      success: function(response) {
+        // Handle the success response
+        console.log(response);
+      },
+      error: function(error) {
+        // Handle the error response
+        console.error(error);
+      }
+    });
+
+    $.ajax({
+      method: 'GET',
+      url: '/favorites',
+      success: function(response) {
+        console.log('success', response);
+      }
+    });
+  });
+
+  //Unfavorite an item
+  $('.card-body').on('click', '.heart-icon', function() {
+    const card = $(this).closest('.card');
+    const itemId = card.find('a').attr('href').split('/').pop();
+    const favoriteData = {
+      carId: itemId
+    };
+
+    $.ajax({
+      method: 'POST',
+      url: '/favorites/remove',
+      data: favoriteData,
+      success: function(response){
+        console.log("Response from /favorites/remove", response);
+  
+        removeFromFavorites(userId, carId)
+        .then(() => {
+          console.log('Item removed from favorites');
         })
-        .fail(error => {
-          console.log(`Error: ${error}`);
-        });
+        .catch((error) => {
+          console.log("Favorited item removal error:", error);
+        })
+      },
+          error: function(error) {
+        console.log(error);
+      }
     });
 
-    $('.card-body').on('click', '.heart-icon', function () {
-      // Find the closest parent card element
-      const card = $(this).closest('.card');
+  })
 
-      // Extract item.id from the href attribute
-      const itemId = card.find('a').attr('href').split('/').pop();
 
-      const favoriteData = {
-        carId: itemId
-      };
 
-      $.ajax({
-        method: 'POST',
-        url: '/favorites',
-        data: favoriteData,
-        success: function (response) {
-          // Handle the success response
-          console.log(response);
-        },
-        error: function (error) {
-          // Handle the error response
-          console.error(error);
-        }
-      });
-
-      $.ajax({
-        method: 'GET',
-        url: '/favorites',
-        success: function (response) {
-          console.log('success');
-        }
-      });
-    });
-})
+});
