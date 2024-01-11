@@ -258,7 +258,7 @@ $(document).ready(function() {
       method: 'GET',
       url: '/favorites',
       success: function(response) {
-        console.log('success', response);
+        console.log('success');
       }
     });
   });
@@ -276,8 +276,8 @@ $(document).ready(function() {
       url: '/favorites/remove',
       data: favoriteData,
       success: function(response){
-        console.log("Response from /favorites/remove", response);
-  
+        // console.log("Response from /favorites/remove", response);
+        const { userId, carId } = response;
         removeFromFavorites(userId, carId)
         .then(() => {
           console.log('Item removed from favorites');
