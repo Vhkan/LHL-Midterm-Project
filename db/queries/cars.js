@@ -124,6 +124,49 @@ const addCar = (options) => {
     });
 };
 
+//WORKS
+//Inserting favs to our cars table
+// id - users id, itemId - favorited item id
+const addToFavorites = async (id, carId) => {
+  try {
+    const queryResult = await db.query('INSERT INTO favorites (user_id, car_id) VALUES ($1, $2) RETURNING *;', [id, carId]);
+    return queryResult.rows[0];
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+
+//Function to get favorited items form cars DB
+// const getFavoritedItems = async (id) => {
+//   const queryParams = [ id ]
+//   try {
+//     const queryResult = await db.query('SELECT * FROM cars JOIN favorites ON cars.id = favorites.car_id WHERE favorites.user_id = $1;', queryParams);
+//     return queryResult.rows[0];
+//   } catch (error) {
+//     console.log('this is favoritedItems: ', error);
+//   }
+// };
+
+const getFavoritedItems = async (userId) => {
+  const queryParams = [userId];
+  console.log('this is the userID in the function: ', userId);
+  try {
+    const queryResult = await db.query(`
+      SELECT *
+      FROM cars
+      JOIN favorites ON cars.id = favorites.car_id
+      WHERE favorites.user_id = $1;
+    `, queryParams);
+
+    return queryResult.rows;
+  } catch (error) {
+    console.error('Error fetching favorited items:', error);
+    throw error;
+  }
+};
 
 
 module.exports = {
@@ -132,5 +175,7 @@ module.exports = {
   filterResults,
   deleteCar,
   markCarAsSold,
-  addCar
+  addCar,
+  getFavoritedItems,
+  addToFavorites
 };

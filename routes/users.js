@@ -8,6 +8,8 @@
 const express = require('express');
 const { getCars, filterResults } = require('../db/queries/cars');
 const { getUsersId } = require('../db/queries/users');
+const { getFavoritedItems } = require('../db/queries/cars'); 
+const { addToFavorites } = require('../db/queries/cars');
 const router = express.Router();
 
 //Admin login data
@@ -84,13 +86,32 @@ router.route('/logout')
     res.redirect('/');
   });
 
-router.route('/contact_seller')
-  .get((req, res) => {
-    res.render('contact_seller', { admin: req.session.admin, user: req.session.user })
-      .post((req, res) => {
-        res.send('How can we help you?')
-      });
-  });
+
+// router.route('/contact_seller')
+//   .get((req, res) => {
+//     res.render('contact_seller', { admin: req.session.admin, user: req.session.user })
+//       .post((req, res) => {
+//         res.send('How can we help you?')
+//       });
+//   });
+
+  //Modified /contact_seller route
+  router.route('/contact_seller')
+    .get(async (req, res) => {
+      try {
+        const user = req.session.user;
+        const favoriteItems = await getFavoritedItems(user);
+        res.render('contact_seller', { admin: req.session.admin, user: req.session.user })
+      } catch (error) {
+        console.log("Error is:", error);
+        res.status(500).send('Server Error');
+      }
+    })
+    .post((req, res) => {
+      res.send('How can we help you today?');
+    });
+
+
 
 //Buyer listing route
 router.route('/buyer_listing')
@@ -106,17 +127,29 @@ router.route('/join')
 
 
 router.route('/favorites')
+.get((req, res) => {
+  const userEmail = userCredentials.email;
+  console.log('this is userEmail: ', userEmail);
+  getUsersId(userEmail)
+    .then(data => {
+      getFavoritedItems(data)
+        .then(data => {
+          console.log('this is favorite data in chain: ', data);
+        })
+    })
+  res.render('buyer_listing', {admin: req.session.admin, user: req.session.user});
+
+})
   .post(async (req, res) => {
     try {
-      const { itemId } = req.body;
-      console.log("Favourited ItemID is:", itemId);
+      const { carId } = req.body;
 
       // Parameterized query to prevent SQL injection
       const userEmail = userCredentials.email;
       const userData = await getUsersId(userEmail);
-      
-      console.log('User ID favorited and item is:', userData);
 
+      // const favoritedItem = await addToFavorites(userData.id ,itemId);
+      
       res.status(200).json({ success: true });
     } catch (error) {
       console.log('Error in /favorites POST:', error);
