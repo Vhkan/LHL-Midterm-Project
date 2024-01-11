@@ -43,7 +43,7 @@ router.get('/', (req, res) => {
         res.render('index', { data, admin: req.session.admin, user: req.session.user})
       })
     }
-
+if (userEmail) {
   getUsersId(userEmail)
     .then(data => {
       return getFavoritedItems(data.id);
@@ -59,6 +59,7 @@ router.get('/', (req, res) => {
       console.error('Error: ', error);
       res.status(500).send('Internal Server Error');
     })
+  }
   });
 
 

@@ -192,3 +192,32 @@ header {
 .add-car-btn {
   margin-top: 1.5em;
 }
+
+.logged-in {
+  padding-top: 0.7em;
+}
+
+.logout-btn {
+  margin-top: 0.5em;
+}
+
+.custom-add-car-container {
+  width: 800px;
+  height: 800px;
+  padding-bottom: 80px;
+}
+
+.list-new-input {
+  background-color: rgba(243, 215, 152, 0.8);
+}
+
+.vehicle-card {
+  padding-bottom: 2em;
+}
+.form-control.filter-line {
+  background-color: rgba(243, 215, 152, 0.8);
+}
+
+.card-body {
+  background-color: rgba(241, 194, 84, 0.7);
+}
