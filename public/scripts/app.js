@@ -235,7 +235,7 @@ function updateCarList(cars, isAdmin) {
       const itemId = card.find('a').attr('href').split('/').pop();
 
       const favoriteData = {
-        itemId: itemId
+        carId: itemId
       };
 
       $.ajax({
@@ -249,6 +249,14 @@ function updateCarList(cars, isAdmin) {
         error: function (error) {
           // Handle the error response
           console.error(error);
+        }
+      });
+
+      $.ajax({
+        method: 'GET',
+        url: '/favorites',
+        success: function (response) {
+          console.log('success');
         }
       });
     });
