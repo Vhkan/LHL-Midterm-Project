@@ -27,8 +27,16 @@ const userCredentials = {
   password: "123"
 };
 
-
 router.get('/', (req, res) => {
+  const userEmail = userCredentials.email;
+  const favoriteCar = getUsersId(userEmail)
+    .then(data => {
+      getFavoritedItems(data.id)
+        .then(() => {
+          console.log('success');
+        });
+        console.log("Fav car", favoriteCar);
+    })
   if (req.session.admin) {
     getCars()
       .then(() => {
@@ -37,7 +45,7 @@ router.get('/', (req, res) => {
     }
   getCars()
     .then(data => {
-      res.render('index', { data, admin: req.session.admin, user: req.session.user })
+      res.render('index', { data, admin: req.session.admin, user: req.session.user, favorite: favoriteCar })
     })
   });
 
@@ -107,7 +115,7 @@ router.route('/contact_seller')
 //Buyer listing route
 router.route('/buyer_listing')
   .get((req, res) => {
-    res.render('buyer_listing', { user: req.session.user, admin: req.session.admin })
+    res.render('favorites', { user: req.session.user, admin: req.session.admin })
   });
 
 
@@ -124,7 +132,7 @@ router.route('/favorites')
     .then(data => {
       getFavoritedItems(data.id)
         .then(data => {
-          res.render('buyer_listing', {admin: req.session.admin, user: req.session.user, data});
+          res.render('favorites', {admin: req.session.admin, user: req.session.user, data});
         })
     })
 })

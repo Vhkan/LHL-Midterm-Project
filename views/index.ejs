@@ -143,7 +143,7 @@
                     <h6 class="card-info"><b>Price:</b> $<%= item.price %>
                     </h6>
                     <a href="/contact_seller" class="btn btn-warning btn-md" role="button">Contact Seller</a>
-                    <% if (user) { %>
+                    <% if (user && !favorite.car_id) { %>
                     <div class="add-to-favs">
                       <!-- When favorite btn is clicked -->
                       <b>Add to Favourites </b><i class="heart-icon fa-solid fa-heart fa-lg"></i>
