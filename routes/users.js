@@ -10,6 +10,7 @@ const { getCars, filterResults } = require('../db/queries/cars');
 const { getUsersId } = require('../db/queries/users');
 const { getFavoritedItems } = require('../db/queries/cars');
 const { addToFavorites } = require('../db/queries/cars');
+const { removeFromFavorites } = require('../db/queries/cars');
 const router = express.Router();
 
 //Admin login data
@@ -86,31 +87,21 @@ router.route('/logout')
     res.redirect('/');
   });
 
-
-// router.route('/contact_seller')
-//   .get((req, res) => {
-//     res.render('contact_seller', { admin: req.session.admin, user: req.session.user })
-//       .post((req, res) => {
-//         res.send('How can we help you?')
-//       });
-//   });
-
-  //Modified /contact_seller route
-  router.route('/contact_seller')
-    .get(async (req, res) => {
-      try {
-        const user = req.session.user;
-        const favoriteItems = await getFavoritedItems(user);
-        res.render('contact_seller', { admin: req.session.admin, user: req.session.user })
-      } catch (error) {
-        console.log("Error is:", error);
-        res.status(500).send('Server Error');
-      }
-    })
-    .post((req, res) => {
-      res.send('How can we help you today?');
-    });
-
+// Modified /contact_seller route
+router.route('/contact_seller')
+  .get(async (req, res) => {
+    try {
+      const user = req.session.user;
+      const favoriteItems = await getFavoritedItems(user);
+      res.render('contact_seller', { admin: req.session.admin, user: req.session.user, favoriteItems: favoriteItems });
+    } catch (error) {
+      console.log("Contact Seller page error is:", error);
+      res.status(500).send('Contact Seller page error: ' + error);
+    }
+  })
+  .post((req, res) => {
+    res.status(200).send('How can we help you today?');
+  });
 
 
 //Buyer listing route
@@ -136,7 +127,6 @@ router.route('/favorites')
           res.render('buyer_listing', {admin: req.session.admin, user: req.session.user, data});
         })
     })
-
 })
   .post(async (req, res) => {
 
@@ -148,12 +138,30 @@ router.route('/favorites')
             .then(data => {
               res.json(data);
             })
-
         })
         .catch (error => {
           res.status(500).json({ error: `Internal Server Error, ${error}` });
         })
   });
+
+
+  //Removing an unfavorited item
+  router.route('/favorites/remove')
+    .post((req, res) => {
+
+        const { carId } = req.body;
+        const userEmail = userCredentials.email;
+        getUsersId(userEmail)
+        .then(data => {
+          removeFromFavorites(data.id, carId)
+          .then(data => {
+            res.json(data);
+          })
+        })
+        .catch (error => {
+          res.status(500).json({ error: `Server error removing from favorites, ${error}` });
+        }) 
+    });
 
 
 module.exports = router;

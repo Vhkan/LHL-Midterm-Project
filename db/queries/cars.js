@@ -124,7 +124,6 @@ const addCar = (options) => {
     });
 };
 
-//WORKS
 //Inserting favs to our cars table
 // id - users id, itemId - favorited item id
 const addToFavorites = async (id, carId) => {
@@ -136,19 +135,7 @@ const addToFavorites = async (id, carId) => {
   }
 };
 
-
-
-
-//Function to get favorited items form cars DB
-// const getFavoritedItems = async (id) => {
-//   const queryParams = [ id ]
-//   try {
-//     const queryResult = await db.query('SELECT * FROM cars JOIN favorites ON cars.id = favorites.car_id WHERE favorites.user_id = $1;', queryParams);
-//     return queryResult.rows[0];
-//   } catch (error) {
-//     console.log('this is favoritedItems: ', error);
-//   }
-// };
+//Function to get favorited items from cars DB
 
 const getFavoritedItems = async (userId) => {
   const queryParams = [userId];
@@ -161,6 +148,8 @@ const getFavoritedItems = async (userId) => {
       WHERE favorites.user_id = $1;
     `, queryParams);
 
+    console.log("Get fav Items", queryResult.rows);
+    
     return queryResult.rows;
   } catch (error) {
     console.error('Error fetching favorited items:', error);
@@ -168,6 +157,30 @@ const getFavoritedItems = async (userId) => {
   }
 };
 
+//Remove an unfavorited item
+// const removeFromFavorites = async (userId, carId) => {
+//   try {
+//     const queryResult = await db.query('DELETE FROM favorites WHERE user_id = $1 AND car_id = $2;', [userId, carId]);
+//     return queryResult.rows[0];
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
+const removeFromFavorites = async (userId, carId) => {
+  const queryParams = [userId, carId];
+
+  try {
+    const queryResult = await db.query(`
+      DELETE FROM favorites
+      WHERE user_id = $1 AND car_id = $2;`, queryParams);
+
+    return queryResult.rows[0];
+  } catch (error) {
+    console.log('Removal favorited item error', error);
+    throw error;
+  }
+};
 
 module.exports = {
   getCars,
@@ -177,5 +190,6 @@ module.exports = {
   markCarAsSold,
   addCar,
   getFavoritedItems,
-  addToFavorites
+  addToFavorites,
+  removeFromFavorites
 };
