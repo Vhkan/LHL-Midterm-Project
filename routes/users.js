@@ -28,24 +28,36 @@ const userCredentials = {
 };
 
 router.get('/', (req, res) => {
-  const userEmail = userCredentials.email;
-  const favoriteCar = getUsersId(userEmail)
-    .then(data => {
-      getFavoritedItems(data.id)
-        .then(() => {
-          console.log('success');
-        });
-        console.log("Fav car", favoriteCar);
-    })
+  const userEmail = req.session.user ? userCredentials.email : null;
+
   if (req.session.admin) {
     getCars()
       .then(() => {
         res.redirect('/inventory');
       });
     }
-  getCars()
+
+  if (!userEmail) {
+    getCars()
+      .then(data => {
+        res.render('index', { data, admin: req.session.admin, user: req.session.user})
+      })
+    }
+
+  getUsersId(userEmail)
     .then(data => {
-      res.render('index', { data, admin: req.session.admin, user: req.session.user, favorite: favoriteCar })
+      return getFavoritedItems(data.id);
+    })
+    .then(favoriteCar => {
+      return getCars().then(data => {
+      const favorite = [];
+      favoriteCar.forEach(element => favorite.push(element.car_id));
+      res.render('index', {data, admin: req.session.admin, user: req.session.user, favorite: favorite})
+      })
+    })
+    .catch(error => {
+      console.error('Error: ', error);
+      res.status(500).send('Internal Server Error');
     })
   });
 
@@ -100,8 +112,8 @@ router.route('/contact_seller')
   .get(async (req, res) => {
     try {
       const user = req.session.user;
-      const favoriteItems = await getFavoritedItems(user);
-      res.render('contact_seller', { admin: req.session.admin, user: req.session.user, favoriteItems: favoriteItems });
+      // const favoriteItems = await getFavoritedItems(user);
+      res.render('contact_seller', { admin: req.session.admin, user: req.session.user });
     } catch (error) {
       console.log("Contact Seller page error is:", error);
       res.status(500).send('Contact Seller page error: ' + error);
@@ -168,7 +180,7 @@ router.route('/favorites')
         })
         .catch (error => {
           res.status(500).json({ error: `Server error removing from favorites, ${error}` });
-        }) 
+        })
     });
 
 
