@@ -147,8 +147,6 @@ const getFavoritedItems = async (userId) => {
       JOIN favorites ON cars.id = favorites.car_id
       WHERE favorites.user_id = $1;
     `, queryParams);
-
-    console.log("Get fav Items", queryResult.rows);
     
     return queryResult.rows;
   } catch (error) {

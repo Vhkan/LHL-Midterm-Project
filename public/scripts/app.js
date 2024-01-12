@@ -4,26 +4,6 @@ $(document).ready(function() {
 
   console.log('Client works');
 
-  //Delegation when a favorite btn is clicked
-  const favoriteItem = function(event) {
-    event.preventDefault();
-
-    if (event.target.classList.contains('heart-icon')) {
-      // Adds 'is-favorite' class if doesn't exist and removes if it does
-      $(event.target).toggleClass('is-favorite');
-
-      if ($(event.target).hasClass('is-favorite')) {
-        // changes the color to yellow if the fav class is present
-        $(event.target).css('color', '#FFC436');
-      } else {
-        // Resets the color to dark-blue is the class is not present
-        $(event.target).css('color', '#033c9d');
-      }
-    }
-  }
-  $(document).on('click', '.heart-icon', favoriteItem);
-
-
   let selectedYear, selectedModel, selectedMake, selectedPrice;
 
   // capturing values from each filter option
@@ -253,46 +233,7 @@ $(document).ready(function() {
         console.error(error);
       }
     });
-
-    $.ajax({
-      method: 'GET',
-      url: '/favorites',
-      success: function(response) {
-        console.log('success');
-      }
-    });
   });
-
-  //Unfavorite an item
-  $('.card-body').on('click', '.heart-icon', function() {
-    const card = $(this).closest('.card');
-    const itemId = card.find('a').attr('href').split('/').pop();
-    const favoriteData = {
-      carId: itemId
-    };
-
-    $.ajax({
-      method: 'POST',
-      url: '/favorites/remove',
-      data: favoriteData,
-      success: function(response){
-        // console.log("Response from /favorites/remove", response);
-        const { userId, carId } = response;
-        removeFromFavorites(userId, carId)
-        .then(() => {
-          console.log('Item removed from favorites');
-        })
-        .catch((error) => {
-          console.log("Favorited item removal error:", error);
-        })
-      },
-          error: function(error) {
-        console.log(error);
-      }
-    });
-
-  })
-
 
 
 });
