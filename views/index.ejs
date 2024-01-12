@@ -36,12 +36,12 @@
       <div class="row">
         <div class="col-md-3 car-filter">
           <form class="filter-form" action="/filtered" method="POST">
-            <h2>Filter Menu</h2>
+            <h2><b>Filter Menu</b></h2>
             <table class="table">
               <tbody>
                 <tr>
                   <td>
-                    <select class="form-control" id="filterYear">
+                    <select class="form-control filter-line" id="filterYear">
                       <option value="">Year</option>
                       <% const uniqueYear = []; %>
                       <% data.forEach((item) => { %>
@@ -57,7 +57,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <select class="form-control" id="filterMake">
+                    <select class="form-control filter-line" id="filterMake">
                       <option value="">Make</option>
                       <% const uniqueMake = []; %>
                       <% data.forEach((item) => { %>
@@ -73,7 +73,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <select class="form-control" id="filterModel">
+                    <select class="form-control filter-line" id="filterModel">
                       <option value="">Model</option>
                       <% const uniqueModel = []; %>
                       <% data.forEach((item) => { %>
@@ -89,7 +89,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <select class="form-control" id="filterPrice">
+                    <select class="form-control filter-line" id="filterPrice">
                       <option value="">Price</option>
                       <option value="10000 20000">$10,000 - $20,000</option>
                       <option value="20000 30000">$20,000 - $30,000</option>
@@ -109,14 +109,14 @@
               </tbody>
             </table>
 
-            <button type="submit" class="btn btn-primary">Apply Filters</button>
+            <button type="submit" class="btn btn-primary filter-button">Apply Filters</button>
           </form>
         </div>
 
         <div class="col-md-9">
           <div class="row mb-4">
             <% data.forEach(item=> { %>
-              <div class="col-md-3">
+              <div class="col-md-3 vehicle-card">
                 <div class="card">
                   <a href="/sell/<%= item.id %>">
                     <% if (item.is_sold) { %>

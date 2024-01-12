@@ -225,6 +225,7 @@ $(document).ready(function() {
       url: '/favorites',
       data: favoriteData,
       success: function(response) {
+        location.reload();
         // Handle the success response
         console.log(response);
       },

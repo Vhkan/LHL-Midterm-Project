@@ -10,7 +10,7 @@
       <div class="nav-buttons">
         <div class="home-about-contact">
         <a href="/" style="text-decoration: none;">HOME</a>
-        <a href="/about" style="text-decoration: none;">ABOUT US</a>
+        <!-- <a href="/about" style="text-decoration: none;">ABOUT US</a> -->
         <a href="/contact_seller" style="text-decoration: none;">CONTACT US</a>
         <a href="/favorites" style="text-decoration: none;">FAVORITES</a>
       </div>
@@ -19,14 +19,14 @@
 <!-- Admin/Seller authentication form -->
 
 <% if (admin) { %>
-  <p style="color: #2b77f9;">Logged in as: <b>Admin</b></p>
+  <p class="logged-in" style="color: #2b77f9;">Logged in as: <b>Admin</b></p>
   <form action="/logout" method="POST">
-    <button type="submit" class="btn btn-outline-secondary">Logout</button>
+    <button type="submit" class="logout-btn btn btn-primary">Logout</button>
   </form>
 <% } else if (user) { %>
-  <p style="color: #2b77f9;">Logged in as: <b>User</b></p>
+  <p class="logged-in" style="color: #2b77f9;">Logged in as: <b>User</b></p>
   <form action="/logout" method="POST">
-    <button type="submit" class="btn btn-outline-secondary">Logout</button>
+    <button type="submit" class="logout-btn btn btn-primary">Logout</button>
   </form>
 <% } else { %>
   <form action="/login" method="POST">
@@ -37,6 +37,7 @@
     </div>
   </form>
 <% } %>
+
 
 
 </header>
