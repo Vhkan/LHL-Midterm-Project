@@ -147,44 +147,46 @@ $(document).ready(function() {
   const $messageInput = $("#messageInput");
   const $chatContainer = $("#chatContainer");
 
-  $('#send-btn').click(sendMessage);
+  
 
-  function sendMessage() {
-    const msg = $messageInput.val();
+  // $('#send-btn').click(sendMessage);
 
-    // New message based on the sender (Seller/Buyer)
-    const sender = isSellerTurn() ? "Seller" : "Buyer";
+  // function sendMessage() {
+  //   const msg = $messageInput.val();
 
-    //Cerating a message + class (sender + "-message" => "Buyer-message")
-    const newMessage = $("<div class='mb-2 " + sender + "-message'><strong>" + sender + ":</strong> " + msg + "</div>");
+  //   // New message based on the sender (Seller/Buyer)
+  //   const sender = isSellerTurn() ? "Seller" : "Buyer";
 
-    // Adds a new message to the chat
-    $chatContainer.append(newMessage);
+  //   //Cerating a message + class (sender + "-message" => "Buyer-message")
+  //   const newMessage = $("<div class='mb-2 " + sender + "-message'><strong>" + sender + ":</strong> " + msg + "</div>");
 
-    // Clears the msg input field
-    $messageInput.val("");
+  //   // Adds a new message to the chat
+  //   $chatContainer.append(newMessage);
 
-    // Changes the message sender
-    toggleSenderTurn();
-  }
+  //   // Clears the msg input field
+  //   $messageInput.val("");
 
-  // Check if it's the seller's / buyer's turn now
-  //Returns a true/false boolean
-  function isSellerTurn() {
-    if ($('.seller-message').length % 2 === 0) {
-      return true; // It's seller's turn
-    } else {
-      return false; // It's buyer's turn
-    }
-  }
-  // Toggles sender's the turn
-  function toggleSenderTurn() {
-    if (isSellerTurn()) {
-      $chatContainer.append("<div class='mb-2 buyer-message'><strong>Buyer:</strong> Typing...</div>");
-    } else {
-      $chatContainer.append("<div class='mb-2 seller-message'><strong>Seller:</strong> Typing...</div>");
-    }
-  }
+  //   // Changes the message sender
+  //   toggleSenderTurn();
+  // }
+
+  // // Check if it's the seller's / buyer's turn now
+  // //Returns a true/false boolean
+  // function isSellerTurn() {
+  //   if ($('.seller-message').length % 2 === 0) {
+  //     return true; // It's seller's turn
+  //   } else {
+  //     return false; // It's buyer's turn
+  //   }
+  // }
+  // // Toggles sender's the turn
+  // function toggleSenderTurn() {
+  //   if (isSellerTurn()) {
+  //     $chatContainer.append("<div class='mb-2 buyer-message'><strong>Buyer:</strong> Typing...</div>");
+  //   } else {
+  //     $chatContainer.append("<div class='mb-2 seller-message'><strong>Seller:</strong> Typing...</div>");
+  //   }
+  // }
 
   // SOLD checkbox
 
@@ -208,7 +210,7 @@ $(document).ready(function() {
   });
 
 
-  
+
   //Favorite an item
   $('.card-body').on('click', '.heart-icon', function() {
     // Find the closest parent card element

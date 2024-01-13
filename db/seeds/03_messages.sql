@@ -1,2 +1,2 @@
-INSERT INTO messages (sender_id, reciever_id)
+INSERT INTO messages (sender_id, receiver_id)
 VALUES ();

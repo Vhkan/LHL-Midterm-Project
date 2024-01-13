@@ -28,7 +28,7 @@
 
   <!-- jQuery link -->
   <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
+  <script defer src="/scripts/messages.js"></script>
 
 </head>
 
@@ -36,39 +36,38 @@
 
   <%- include('partials/header') %>
 
-  <div class="msg-container container mt-4">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <div class="card">
-          <div class="chat-card card-header bg text-white">
-            Chat With Us
-          </div>
-          <div class="card-body chat-container" id="chatContainer">
-            <div class="mb-2 seller-message">
-              <strong>Seller:</strong> Hi there! How can we help you today?
-            </div>
-          </div>
-          <div class="card-footer">
-            <div class="input-group">
-              <input type="text" class="form-control" id="messageInput" placeholder="Type your message..."
-                aria-label="Type your message" aria-describedby="send-btn">
-              <button class="send-btn btn" type="button" id="send-btn">
-                <i class="fas fa-paper-plane"></i> Send
-              </button>
+  <form class="message-form" action="/messages" method="POST">
+    <div class="msg-container container mt-4">
+      <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="card">
+              <div class="chat-card card-header bg text-white">
+                Chat With Us
+              </div>
+              <div class="card-body chat-container" id="chatContainer">
+                <div class="mb-2 seller-message">
+                  <strong>Seller:</strong> Hi there! How can we help you today?
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="messageInput" placeholder="Type your message..."
+                    aria-label="Type your message" aria-describedby="send-btn">
+                  <button class="send-btn btn" type="submit" id="send-btn">
+                    <i class="fas fa-paper-plane"></i> Send
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 
 
     <%- include('partials/footer') %>
 
       <!-- Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-u8z6wCDO/iPduYNySEGAhJdkZLfReQofMEJ9b98loF4bRs35nusD2PrEAe82LJbP"
         crossorigin="anonymous"></script>
