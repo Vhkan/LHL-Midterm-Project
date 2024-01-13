@@ -67,11 +67,10 @@
               <h6 class="card-info"><b>Price:</b> $<%= item.price %>
               </h6>
               <a href="/contact_seller" class="btn btn-warning btn-lg" role="button">Contact Seller</a>
-                <b>Unfavourite </b><i class="heart-icon fa-solid fa-heart fa-lg"></i>
               <% if (user) { %>
-              <div class="add-to-favs">
-                <!-- When favorite btn is clicked -->
-                <!-- <b>Add to Favourites </b><i class="heart-icon fa-solid fa-heart fa-lg"></i> -->
+                <div class="add-to-favs">
+                <b>Unfavourite </b>
+                <i class="fa-solid fa-trash fa-beat-fade"></i>
               </div>
               <% } %>
 
