@@ -37,16 +37,6 @@ $(document).ready(function() {
   $('.filter-form').on('submit', function(event) {
     event.preventDefault();
 
-    // creating object to pass to server side route
-
-    // example object:
-    // const formData = {
-    //  year: 1959,
-    //  make: 'Chevrolet',
-    //  model: 'Corvette',
-    //  price: ['80000', '90000']
-    // };
-
     const formData = {
       year: selectedYear,
       make: selectedMake,
@@ -140,52 +130,6 @@ $(document).ready(function() {
     });
   }
 
-
-
-  //Chat on contact_seller page V2
-
-  const $messageInput = $("#messageInput");
-  const $chatContainer = $("#chatContainer");
-
-  $('#send-btn').click(sendMessage);
-
-  function sendMessage() {
-    const msg = $messageInput.val();
-
-    // New message based on the sender (Seller/Buyer)
-    const sender = isSellerTurn() ? "Seller" : "Buyer";
-
-    //Cerating a message + class (sender + "-message" => "Buyer-message")
-    const newMessage = $("<div class='mb-2 " + sender + "-message'><strong>" + sender + ":</strong> " + msg + "</div>");
-
-    // Adds a new message to the chat
-    $chatContainer.append(newMessage);
-
-    // Clears the msg input field
-    $messageInput.val("");
-
-    // Changes the message sender
-    toggleSenderTurn();
-  }
-
-  // Check if it's the seller's / buyer's turn now
-  //Returns a true/false boolean
-  function isSellerTurn() {
-    if ($('.seller-message').length % 2 === 0) {
-      return true; // It's seller's turn
-    } else {
-      return false; // It's buyer's turn
-    }
-  }
-  // Toggles sender's the turn
-  function toggleSenderTurn() {
-    if (isSellerTurn()) {
-      $chatContainer.append("<div class='mb-2 buyer-message'><strong>Buyer:</strong> Typing...</div>");
-    } else {
-      $chatContainer.append("<div class='mb-2 seller-message'><strong>Seller:</strong> Typing...</div>");
-    }
-  }
-
   // SOLD checkbox
 
   $('.row.mb-4').on('change', '.form-check-input', function() {
@@ -208,7 +152,7 @@ $(document).ready(function() {
   });
 
 
-  
+
   //Favorite an item
   $('.card-body').on('click', '.heart-icon', function() {
     // Find the closest parent card element
@@ -226,8 +170,6 @@ $(document).ready(function() {
       data: favoriteData,
       success: function(response) {
         location.reload();
-        // Handle the success response
-        console.log(response);
       },
       error: function(error) {
         // Handle the error response

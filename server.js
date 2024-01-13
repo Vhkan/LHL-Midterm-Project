@@ -33,6 +33,7 @@ app.use(express.static('public'));
 const usersRoutes = require('./routes/users');
 const inventoryRoutes = require('./routes/inventory');
 const sellRoutes = require('./routes/sell');
+const messageRoutes = require('./routes/messages');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -40,6 +41,7 @@ const sellRoutes = require('./routes/sell');
 app.use('/', usersRoutes);
 app.use('/inventory', inventoryRoutes);
 app.use('/sell', sellRoutes);
+app.use('/messages', messageRoutes);
 
 
 

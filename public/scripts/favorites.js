@@ -1,6 +1,6 @@
 $(document).ready(function() {
   //Unfavorite an item
-  $('.card-body').on('click', '.heart-icon', function() {
+  $('.card-body').on('click', '.fa-trash', function() {
     const card = $(this).closest('.card');
     const itemId = card.find('a').attr('href').split('/').pop();
     const favoriteData = {
@@ -12,17 +12,10 @@ $(document).ready(function() {
       url: '/favorites/remove',
       data: favoriteData,
       success: function(response) {
-        // console.log("Response from /favorites/remove", response);
-        const { userId, carId } = response;
-        removeFromFavorites(userId, carId)
-          .then(() => {
-            console.log('Item removed from favorites');
-          })
-          .catch((error) => {
-            console.log("Favorited item removal error:", error);
-          })
+      console.log('success');
       },
       error: function(error) {
+        location.reload();
         console.log(error);
       }
     });
@@ -46,6 +39,7 @@ $(document).ready(function() {
     }
   }
   $(document).on('click', '.heart-icon', favoriteItem);
+  $(document).on('click', '.fa-trash', favoriteItem);
 
 
 });
