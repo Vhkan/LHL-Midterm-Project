@@ -1,5 +1,10 @@
-LHL Node Skeleton
-=========
+
+
+# True Retro Buy & Sell Listing App
+A platform designed for listing cars for sale, facilitating direct chat communication between buyers and sellers. It features price-based search filters and enables users to save listings to a favorites list for easy access. Administrators can post new listings, remove existing ones, and mark items as sold. The platform also allows users to send direct messages to sellers for inquiries or negotiations.
+
+## Final Product
+
 
 ## Project Setup
 
