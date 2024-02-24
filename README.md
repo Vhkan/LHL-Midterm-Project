@@ -4,7 +4,10 @@
 A platform designed for listing cars for sale, facilitating direct chat communication between buyers and sellers. It features price-based search filters and enables users to save listings to a favorites list for easy access. Administrators can post new listings, remove existing ones, and mark items as sold. The platform also allows users to send direct messages to sellers for inquiries or negotiations.
 
 ## Final Product
-
+![Main-Page](https://github.com/Vhkan/LHL-Midterm-Project/blob/master/public/documents/final-project-screens/MainPage.png "Main")
+![User-Page](https://github.com/Vhkan/LHL-Midterm-Project/blob/master/public/documents/final-project-screens/user-page.png "User")
+![Car-Page](https://github.com/Vhkan/LHL-Midterm-Project/blob/master/public/documents/final-project-screens/Car-page.png "Car")
+![Contact-Page](https://github.com/Vhkan/LHL-Midterm-Project/blob/master/public/documents/final-project-screens/Contact-page.png "Contact")
 
 ## Project Setup
 
@@ -15,7 +18,6 @@ The following steps are only for _one_ of the group members to perform.
 3. Clone your copy of the repo to your dev machine
 4. Add your team members as collaborators to the project so that they can push to this repo
 5. Let your team members know the repo URL so that they use the same repo (they should _not_ create a copy/fork of this repo since that will add additional workflow complexity to the project)
-
 
 ## Getting Started
 
